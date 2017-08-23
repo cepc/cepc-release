@@ -1,0 +1,9 @@
+User package version: HEAD
+
+cepcenv package-release
+Automatically tag the current version
+
+CEPC_CLHEP_SRC
+CEPC_CLHEP_BIN
+CEPC_CLHEP_LIB
+CEPC_CLHEP_MAN
