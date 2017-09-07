@@ -2,6 +2,9 @@ User package version: HEAD
 
 cepcenv package-release
 Automatically tag the current version
+version=`git rev-parse --show-toplevel`/`cat release_version.yml`
+git tag $version
+git push --tags
 
 CEPC_CLHEP_SRC
 CEPC_CLHEP_BIN

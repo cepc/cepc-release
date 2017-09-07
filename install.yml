@@ -1,0 +1,81 @@
+CLHEP:
+  download:
+    handler: http
+    param:
+      url: https://proj-clhep.web.cern.ch/proj-clhep/DISTRIBUTION/tarFiles/clhep-{version}.tgz
+  extract:
+    handler: tar
+  pre_check:
+    handler: ppp
+  install:
+    handler: cmake
+  post_check:
+    handler: lib
+
+ROOT:
+  download:
+    handler: http
+    param:
+      url: https://root.cern.ch/download/root_v{version}.source.tar.gz
+  extract:
+    handler: tar
+  pre_check:
+    handler: ppp
+  install:
+    handler: cmake
+  post_check:
+    handler: lib
+
+Geant4:
+  download:
+    handler: http
+    param:
+      url: http://geant4.cern.ch/support/source/geant4.{version}.tar.gz
+  extract:
+    handler: tar
+  pre_check:
+    handler: ppp
+  install:
+    handler: cmake
+  post_check:
+    handler: lib
+
+GEAR:
+  download:
+    handler: empty
+  extract:
+    handler: tar
+  pre_check:
+    handler: ppp
+  install:
+    handler: cmake
+  post_check:
+    handler: lib
+
+LCIO:
+  download:
+    handler: empty
+  extract:
+    handler: tar
+  pre_check:
+    handler: ppp
+  install:
+    handler: cmake
+  post_check:
+    handler: lib
+
+Mokka:
+  download:
+    handler: empty
+  extract:
+    handler: tar
+  pre_check:
+    handler: ppp
+  install:
+    handler: cmake
+  post_check:
+    handler: lib
+
+MySQL:
+  post_check:
+    handler: lib

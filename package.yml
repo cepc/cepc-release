@@ -1,26 +1,34 @@
-release_version: 01-17-05
+Mokka:
+  category: cepcsoft
+  path: Simulation
+  version: mokka-08-03
+  dep: [ "LCIO", "GEAR", "Geant4", "MySQL" ]
 
-system:
-  MySQL:
-    version: >5.5
+MySQL:
+  category: system
 
-external-common:
-  root:
-    location: external-common
-    path: Service
-    version: 5.34.10
+LCIO:
+  category: cepcsoft
+  path: Framework
+  version: 02-04-03
 
-external-release:
-  CLHEP:
-    version: 5.34.10
+GEAR:
+  category: cepcsoft
+  path: Simulation
+  version: 01-04
+  dep: CLHEP
 
-cepcsoft:
-  Mokka:
-    path: Simulation
-    version: mokka-08-03
-    dep: [xxx, yyy, MySQL]
+Geant4:
+  category: external_release
+  path: Service
+  version: 9.6.p02
 
-  KalTest:
-    path: Reconstruction
-    version: 02-00-32
-    dep: [Marlin]
+ROOT:
+  category: external_common
+  path: Service
+  version: 5.34.10
+
+CLHEP:
+  category: external_common
+  path: Service
+  version: 2.1.3.1
