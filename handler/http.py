@@ -1,15 +1,12 @@
 import os
-import subprocess
+
+from cepcenv.util import call
 
 def download(param):
     url = param['action_param']['url'].format(**param['pkg_config'])
     dst_dir = param['pkg_config']['download_dir']
 
-    full_cmd = ['curl', '-O', url]
-    p = subprocess.Popen(full_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=dst_dir)
-    out, err = p.communicate()
-    out = out.decode()
-    err = err.decode()
-    ret = p.returncode
+    cmd = ['curl', '-L', '-s', '-O', url]
+    ret, out, err = call(cmd, cwd=dst_dir)
 
-    return {'filename': os.path.basename(url)}
+    return {'log': {'stdout': out, 'stderr': err}}

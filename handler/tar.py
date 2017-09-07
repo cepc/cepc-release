@@ -1,6 +1,9 @@
 import os
-import subprocess
+from cepcenv.util import call
 
 def extract(param):
-    print('extracting param: {0}'.format(param))
-    return None
+    tar_file = os.path.join(param['pkg_config']['download_dir'], param['action_param']['file'])
+    dst_dir = param['pkg_config']['source_dir']
+    cmd = ['tar', 'xvzf', tar_file]
+    ret, out, err = call(cmd, cwd=dst_dir)
+    return {'log': {'stdout': out, 'stderr': err}}

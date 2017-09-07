@@ -5,6 +5,8 @@ CLHEP:
       url: https://proj-clhep.web.cern.ch/proj-clhep/DISTRIBUTION/tarFiles/clhep-{version}.tgz
   extract:
     handler: tar
+    param:
+      file: clhep-{version}.tgz
   pre_check:
     handler: ppp
   install:
@@ -19,6 +21,8 @@ ROOT:
       url: https://root.cern.ch/download/root_v{version}.source.tar.gz
   extract:
     handler: tar
+    param:
+      file: root_v{version}.source.tar.gz
   pre_check:
     handler: ppp
   install:
@@ -33,6 +37,8 @@ Geant4:
       url: http://geant4.cern.ch/support/source/geant4.{version}.tar.gz
   extract:
     handler: tar
+    param:
+      file: geant4.{version}.tar.gz
   pre_check:
     handler: ppp
   install:
@@ -44,7 +50,7 @@ GEAR:
   download:
     handler: empty
   extract:
-    handler: tar
+    handler: empty
   pre_check:
     handler: ppp
   install:
@@ -56,7 +62,7 @@ LCIO:
   download:
     handler: empty
   extract:
-    handler: tar
+    handler: empty
   pre_check:
     handler: ppp
   install:
@@ -68,7 +74,7 @@ Mokka:
   download:
     handler: empty
   extract:
-    handler: tar
+    handler: empty
   pre_check:
     handler: ppp
   install:
