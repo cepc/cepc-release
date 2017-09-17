@@ -1,3 +1,23 @@
+CMake:
+  download:
+    handler: http
+    param:
+      url: http://www.cmake.org/files/v{version:.3}/cmake-{version}.tar.gz
+  extract:
+    handler: tar
+    param:
+      file: cmake-{version}.tar.gz
+  source:
+    handler: copy
+    param:
+      main: cmake-{version}
+  pre_check:
+    handler: ppp
+  install:
+    handler: conf_make
+  post_check:
+    handler: lib
+
 CLHEP:
   download:
     handler: http
@@ -7,6 +27,30 @@ CLHEP:
     handler: tar
     param:
       file: clhep-{version}.tgz
+  source:
+    handler: copy
+    param:
+      main: '{version}/CLHEP'
+  pre_check:
+    handler: ppp
+  install:
+    handler: cmake
+  post_check:
+    handler: lib
+
+GSL:
+  download:
+    handler: http
+    param:
+      url: http://mirrors.kernel.org/gnu/gsl/gsl-{version}.tar.gz
+  extract:
+    handler: tar
+    param:
+      file: gsl-{version}.tar.gz
+  source:
+    handler: copy
+    param:
+      main: gsl-{version}
   pre_check:
     handler: ppp
   install:
@@ -23,6 +67,10 @@ ROOT:
     handler: tar
     param:
       file: root_v{version}.source.tar.gz
+  source:
+    handler: copy
+    param:
+      main: root
   pre_check:
     handler: ppp
   install:
@@ -39,48 +87,45 @@ Geant4:
     handler: tar
     param:
       file: geant4.{version}.tar.gz
+  source:
+    handler: copy
+    param:
+      main: geant4.{version}
   pre_check:
     handler: ppp
   install:
     handler: cmake
+  post_check:
+    handler: lib
+
+ilcsoft_base: &ilcsoft
+  pre_check:
+    handler: ppp
+  install:
+    handler: ilcsoft
   post_check:
     handler: lib
 
 GEAR:
+  <<: *ilcsoft
   download:
-    handler: empty
-  extract:
-    handler: empty
-  pre_check:
-    handler: ppp
-  install:
-    handler: cmake
-  post_check:
-    handler: lib
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/gear/gear/tags/v{version}
 
 LCIO:
+  <<: *ilcsoft
   download:
-    handler: empty
-  extract:
-    handler: empty
-  pre_check:
-    handler: ppp
-  install:
-    handler: cmake
-  post_check:
-    handler: lib
+    handler: default
+    param:
+      url: svn://svn.freehep.org/lcio/tags/v{version}
 
 Mokka:
+  <<: *ilcsoft
   download:
-    handler: empty
-  extract:
-    handler: empty
-  pre_check:
-    handler: ppp
-  install:
-    handler: cmake
-  post_check:
-    handler: lib
+    handler: svn
+    param:
+      url: http://llrforge.in2p3.fr/svn/Mokka/tags/mokka-{version}
 
 MySQL:
   post_check:

@@ -1,0 +1,102 @@
+CMake:
+  location:
+    source: source
+    build: build
+    install: install
+  path:
+    bin: install/bin
+    lib: install/lib
+    man: install/man
+    home: install
+    src: source
+
+Mokka:
+  dep: [CMake, LCIO, GEAR, Geant4, MySQL]
+  location:
+    source: ''
+    build: build
+    install: ''
+  path:
+    bin: install/bin
+    lib: install/lib
+    man: install/man
+    home: install
+    src: source
+
+LCIO:
+  dep: CMake
+  location:
+    source: ''
+    build: build
+    install: ''
+  path:
+    bin: install/bin
+    lib: install/lib
+    man: install/man
+    home: install
+    src: source
+
+GEAR:
+  dep: [CMake, CLHEP]
+  location:
+    source: ''
+    build: build
+    install: ''
+  path:
+    bin: install/bin
+    lib: install/lib
+    man: install/man
+    home: install
+    src: source
+
+Geant4:
+  dep: CMake
+  location:
+    source: source
+    build: build
+    install: install
+  path:
+    bin: install/bin
+    lib: install/lib
+    man: install/man
+    home: install
+    src: source
+
+GSL:
+  location:
+    source: source
+    build: build
+    install: install
+  path:
+    bin: install/bin
+    lib: install/lib
+    man: install/man
+    home: install
+    src: source
+
+ROOT:
+  location:
+    source: source
+    build: build
+    install: install
+  path:
+    bin: install/bin
+    lib: install/lib
+    man: install/man
+    home: install
+    src: source
+  env:
+    ROOTSYS: install
+
+CLHEP:
+  dep: CMake
+  location:
+    source: source
+    build: build
+    install: install
+  path:
+    bin: install/bin
+    lib: install/lib
+    man: install/man
+    home: install
+    src: source

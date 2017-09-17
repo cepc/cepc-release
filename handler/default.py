@@ -4,6 +4,9 @@ def download(param):
 def extract(param):
     pass
 
+def source(param):
+    pass
+
 def pre_check(param):
     pass
 
