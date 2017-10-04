@@ -1,33 +1,30 @@
+gcc:
+  version: 4.9.4
+  category: external_common
+  path: Service
+
 CMake:
   version: 2.8.5
   category: external_common
   path: Service
 
-Mokka:
-  version: 08-03
-  category: cepcsoft
-  path: Simulation
 
 MySQL:
   category: system
 
-LCIO:
-  version: 02-04-03
-  category: cepcsoft
-  path: Framework
 
-GEAR:
-  version: 01-04
-  category: cepcsoft
-  path: Simulation
-
-Geant4:
-  version: 9.6.p02
-  category: external_release
+XercesC:
+  version: 3.2.0
+  category: external_common
   path: Service
 
 GSL:
   version: '1.14'
+  category: external_common
+  path: Service
+
+QT:
+  version: 4.7.4
   category: external_common
   path: Service
 
@@ -40,3 +37,34 @@ CLHEP:
   version: 2.1.3.1
   category: external_common
   path: Service
+
+Geant4:
+  version: 9.6.p02
+  category: external_release
+  path: Service
+
+
+ILCUTIL:
+  version: 01-01
+  category: cepcsoft
+  path: Framework
+
+LCIO:
+  version: 02-04-03
+  category: cepcsoft
+  path: Framework
+
+GEAR:
+  version: 01-04
+  category: cepcsoft
+  path: Simulation
+
+Mokka:
+  version: 08-03
+  category: cepcsoft
+  path: Simulation
+
+Druid:
+  version: '2.2'
+  category: cepcsoft
+  path: EventDisplay

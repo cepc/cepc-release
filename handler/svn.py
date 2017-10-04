@@ -10,4 +10,4 @@ def download(param):
     cmd = ['svn', 'export', '--force', url, version]
     ret, out, err = call(cmd, cwd=dst_dir)
 
-    return {'log': {'stdout': out, 'stderr': err}}
+    return {'ok': ret==0, 'log': {'stdout': out, 'stderr': err}}

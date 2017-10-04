@@ -7,4 +7,4 @@ def source(param):
     dst_dir = param['pkg_config']['source_dir']
     main_dir = param['action_param']['main'].format(**param['pkg_config'])
     safe_mvdir(os.path.join(src_dir, main_dir), dst_dir)
-    return {'log': {'stdout': 'Move OK', 'stderr': ''}}
+    return {'ok': True, 'log': {'stdout': 'Move OK', 'stderr': ''}}

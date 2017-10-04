@@ -31,7 +31,7 @@ def compile(param):
     final_out = ''
     final_err = ''
 
-    ret, out, err = call([configure_path, '--prefix='+install_dir]+configure_args, cwd=build_dir, env=env)
+    ret, out, err = call([configure_path, '-prefix', install_dir]+configure_args, cwd=build_dir, env=env, input=b'yes\n')
     final_out += format_output(out)
     final_err += format_output(err)
 

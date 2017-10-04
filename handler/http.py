@@ -9,4 +9,4 @@ def download(param):
     cmd = ['curl', '-L', '-s', '-O', url]
     ret, out, err = call(cmd, cwd=dst_dir)
 
-    return {'log': {'stdout': out, 'stderr': err}}
+    return {'ok': ret==0, 'log': {'stdout': out, 'stderr': err}}

@@ -7,4 +7,4 @@ def source(param):
     dst_dir = param['pkg_config']['source_dir']
     main_dir = param['action_param']['main'].format(**param['pkg_config'])
     safe_cpdir(os.path.join(src_dir, main_dir), dst_dir)
-    return {'log': {'stdout': 'Copy OK', 'stderr': ''}}
+    return {'ok': True, 'log': {'stdout': 'Copy OK', 'stderr': ''}}

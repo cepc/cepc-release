@@ -1,102 +1,148 @@
+external_path_default: &EXTERNAL_PATH_DEFAULT
+  home: '{install_dir}'
+  src: '{source_dir}'
+
+cepcsoft_path_default: &CEPCSOFT_PATH_DEFAULT
+  <<: *EXTERNAL_PATH_DEFAULT
+  cmake: '{install_dir}'
+
+
+external_default: &EXTERNAL_DEFAULT
+  location:
+    source: source
+    build: build
+    install: install
+
+cepcsoft_default: &CEPCSOFT_DEFAULT
+  location:
+    source: ''
+    build: build
+    install: ''
+
+
+gcc:
+  <<: *EXTERNAL_DEFAULT
+  basic: true
+  path:
+    <<: *EXTERNAL_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    lib: '{install_dir}/lib64'
+    man: '{install_dir}/share/man'
+
 CMake:
-  location:
-    source: source
-    build: build
-    install: install
+  <<: *EXTERNAL_DEFAULT
+  basic: true
+  dep: gcc
   path:
-    bin: install/bin
-    lib: install/lib
-    man: install/man
-    home: install
-    src: source
+    <<: *EXTERNAL_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    lib: '{install_dir}/lib'
+    man: '{install_dir}/man'
 
-Mokka:
-  dep: [CMake, LCIO, GEAR, Geant4, MySQL]
-  location:
-    source: ''
-    build: build
-    install: ''
-  path:
-    bin: install/bin
-    lib: install/lib
-    man: install/man
-    home: install
-    src: source
 
-LCIO:
-  dep: CMake
-  location:
-    source: ''
-    build: build
-    install: ''
+XercesC:
+  <<: *EXTERNAL_DEFAULT
   path:
-    bin: install/bin
-    lib: install/lib
-    man: install/man
-    home: install
-    src: source
-
-GEAR:
-  dep: [CMake, CLHEP]
-  location:
-    source: ''
-    build: build
-    install: ''
-  path:
-    bin: install/bin
-    lib: install/lib
-    man: install/man
-    home: install
-    src: source
-
-Geant4:
-  dep: CMake
-  location:
-    source: source
-    build: build
-    install: install
-  path:
-    bin: install/bin
-    lib: install/lib
-    man: install/man
-    home: install
-    src: source
+    <<: *EXTERNAL_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    inc: '{install_dir}/include'
+    lib: '{install_dir}/lib'
 
 GSL:
-  location:
-    source: source
-    build: build
-    install: install
+  <<: *EXTERNAL_DEFAULT
   path:
-    bin: install/bin
-    lib: install/lib
-    man: install/man
-    home: install
-    src: source
+    <<: *EXTERNAL_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    inc: '{install_dir}/include'
+    lib: '{install_dir}/lib'
+    man: '{install_dir}/share/man'
+    info: '{install_dir}/share/info'
 
-ROOT:
-  location:
-    source: source
-    build: build
-    install: install
+QT:
+  <<: *EXTERNAL_DEFAULT
   path:
-    bin: install/bin
-    lib: install/lib
-    man: install/man
-    home: install
-    src: source
-  env:
-    ROOTSYS: install
+    <<: *EXTERNAL_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    inc: '{install_dir}/include'
+    lib: '{install_dir}/lib64'
 
 CLHEP:
-  dep: CMake
-  location:
-    source: source
-    build: build
-    install: install
+  <<: *EXTERNAL_DEFAULT
   path:
-    bin: install/bin
-    lib: install/lib
-    man: install/man
-    home: install
-    src: source
+    <<: *EXTERNAL_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    inc: '{install_dir}/include'
+    lib: '{install_dir}/lib'
+    cmake: '{install_dir}'
+
+Geant4:
+  <<: *EXTERNAL_DEFAULT
+  dep: [QT, CLHEP, XercesC]
+  path:
+    <<: *EXTERNAL_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    inc: '{install_dir}/include'
+    lib: '{install_dir}/lib64'
+    cmake: '{install_dir}'
+  env:
+    G4NEUTRONHPDATA: '{install_dir}/share/Geant4-9.6.2/data/G4NDL4.2'
+    G4LEDATA: '{install_dir}/share/Geant4-9.6.2/data/G4EMLOW6.32'
+    G4LEVELGAMMADATA: '{install_dir}/share/Geant4-9.6.2/data/PhotonEvaporation2.3'
+    G4RADIOACTIVEDATA: '{install_dir}/share/Geant4-9.6.2/data/RadioactiveDecay3.6'
+    G4NEUTRONXSDATA: '{install_dir}/share/Geant4-9.6.2/data/G4NEUTRONXS1.2'
+    G4PIIDATA: '{install_dir}/share/Geant4-9.6.2/data/G4PII1.3'
+    G4REALSURFACEDATA: '{install_dir}/share/Geant4-9.6.2/data/RealSurface1.0'
+    G4SAIDXSDATA: '{install_dir}/share/Geant4-9.6.2/data/G4SAIDDATA1.1'
+
+ROOT:
+  <<: *EXTERNAL_DEFAULT
+  path:
+    <<: *EXTERNAL_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    inc: '{install_dir}/include'
+    lib: '{install_dir}/lib'
+    man: '{install_dir}/man'
+  env:
+    ROOTSYS: '{install_dir}'
+
+
+ILCUTIL:
+  <<: *CEPCSOFT_DEFAULT
+  path:
+    <<: *CEPCSOFT_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+
+LCIO:
+  <<: *CEPCSOFT_DEFAULT
+  path:
+    <<: *CEPCSOFT_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    inc: '{install_dir}/include'
+    lib: '{install_dir}/lib'
+  env:
+    LCIO: '{install_dir}'
+
+GEAR:
+  <<: *CEPCSOFT_DEFAULT
+  dep: [CLHEP, ILCUTIL]
+  path:
+    <<: *CEPCSOFT_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    inc: '{install_dir}/include'
+    lib: '{install_dir}/lib'
+
+Mokka:
+  <<: *CEPCSOFT_DEFAULT
+  dep: [LCIO, GEAR, Geant4, MySQL, ILCUTIL]
+  path:
+    <<: *CEPCSOFT_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    lib: '{install_dir}/lib'
+
+Druid:
+  <<: *CEPCSOFT_DEFAULT
+  dep: [LCIO, GEAR, ROOT]
+  path:
+    home: '{install_dir}'
+    src: '{source_dir}'
+    bin: '{install_dir}/bin'

@@ -10,7 +10,7 @@ def source(param):
 def pre_check(param):
     pass
 
-def install(param):
+def compile(param):
     pass
 
 def post_check(param):

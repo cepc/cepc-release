@@ -1,3 +1,26 @@
+gcc:
+  download:
+    handler: http
+    param:
+      url: http://ftp.gnu.org/gnu/gcc/gcc-{version}/gcc-{version}.tar.gz
+  extract:
+    handler: tar
+    param:
+      file: gcc-{version}.tar.gz
+  source:
+    handler: copy
+    param:
+      main: gcc-{version}
+  pre_check:
+    handler: gcc
+  compile:
+    handler: conf_make
+    param:
+      configure: ['--enable-languages=c,c++,fortran', --disable-multilib]
+      install: install-strip
+  post_check:
+    handler: lib
+
 CMake:
   download:
     handler: http
@@ -13,8 +36,56 @@ CMake:
       main: cmake-{version}
   pre_check:
     handler: ppp
-  install:
+  compile:
     handler: conf_make
+  post_check:
+    handler: lib
+
+
+MySQL:
+  post_check:
+    handler: lib
+
+
+XercesC:
+  download:
+    handler: http
+    param:
+      url: https://archive.apache.org/dist/xerces/c/3/sources/xerces-c-{version}.tar.gz
+  extract:
+    handler: tar
+    param:
+      file: xerces-c-{version}.tar.gz
+  source:
+    handler: copy
+    param:
+      main: xerces-c-{version}
+  pre_check:
+    handler: ppp
+  compile:
+    handler: conf_make
+  post_check:
+    handler: lib
+
+QT:
+  download:
+    handler: http
+    param:
+      url: http://download.qt-project.org/archive/qt/{version:.3}/qt-everywhere-opensource-src-{version}.tar.gz
+  extract:
+    handler: tar
+    param:
+      file: qt-everywhere-opensource-src-{version}.tar.gz
+  source:
+    handler: copy
+    param:
+      main: qt-everywhere-opensource-src-{version}
+  pre_check:
+    handler: ppp
+  compile:
+    handler: qt
+    param:
+      configure: [-prefix-install, -fast, -make, libs, -no-separate-debug-info, -no-xkb, -no-xinerama, -no-webkit, -opensource]
   post_check:
     handler: lib
 
@@ -33,7 +104,7 @@ CLHEP:
       main: '{version}/CLHEP'
   pre_check:
     handler: ppp
-  install:
+  compile:
     handler: cmake
   post_check:
     handler: lib
@@ -53,8 +124,8 @@ GSL:
       main: gsl-{version}
   pre_check:
     handler: ppp
-  install:
-    handler: cmake
+  compile:
+    handler: conf_make
   post_check:
     handler: lib
 
@@ -73,8 +144,23 @@ ROOT:
       main: root
   pre_check:
     handler: ppp
-  install:
-    handler: cmake
+  compile:
+    handler: root
+    param:
+      configure: 
+        - --fail-on-missing
+        - --enable-builtin-pcre
+        - --enable-explicitlink
+        - --enable-soversion
+        - --enable-roofit
+        - --enable-minuit2
+        - --enable-gdml
+        - --enable-table
+        - --enable-unuran
+        - --enable-gsl-shared
+        - --with-gsl-incdir={gsl_inc_dir}
+        - --with-gsl-libdir={gsl_lib_dir}
+        - --enable-python
   post_check:
     handler: lib
 
@@ -93,40 +179,85 @@ Geant4:
       main: geant4.{version}
   pre_check:
     handler: ppp
-  install:
+  compile:
     handler: cmake
+    param:
+      envcmake:
+        GEANT4_INSTALL_DATA: 'ON'
+        GEANT4_USE_SYSTEM_EXPAT: 'OFF'
+        GEANT4_USE_SYSTEM_CLHEP: 'ON'
+        GEANT4_USE_OPENGL_X11: 'ON'
+        GEANT4_USE_QT: 'ON'
+        GEANT4_USE_GDML: 'ON'
+        XERCESC_ROOT_DIR: '{xercesc_root_dir}'
   post_check:
     handler: lib
 
-ilcsoft_base: &ilcsoft
+
+ilcsoft_base: &ILCSOFT
   pre_check:
     handler: ppp
-  install:
-    handler: ilcsoft
+  compile:
+    handler: cmake
+    param:
+      ignore_install_prefix: True
+      envcmake: &ILCSOFT_ENVCMAKE
+        BUILD_32BIT_COMPATIBLE: 'OFF'
+        INSTALL_DOC: 'OFF'
+        CMAKE_BUILD_TYPE: RelWithDebInfo
   post_check:
     handler: lib
 
+ILCUTIL:
+  <<: *ILCSOFT
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/ilctools/ilcutil/tags/v{version}
+
 GEAR:
-  <<: *ilcsoft
+  <<: *ILCSOFT
   download:
     handler: svn
     param:
       url: https://svnsrv.desy.de/public/gear/gear/tags/v{version}
+  compile:
+    handler: cmake
+    param:
+      ignore_install_prefix: True
+      envcmake:
+        <<: *ILCSOFT_ENVCMAKE
+        GEAR_TGEO: 'ON'
 
 LCIO:
-  <<: *ilcsoft
+  <<: *ILCSOFT
   download:
-    handler: default
+    handler: svn
     param:
       url: svn://svn.freehep.org/lcio/tags/v{version}
+  compile:
+    handler: cmake
+    param:
+      ignore_install_prefix: True
+      envcmake:
+        <<: *ILCSOFT_ENVCMAKE
+        BUILD_ROOTDICT: 'ON'
+        INSTALL_JAR: 'OFF'
 
 Mokka:
-  <<: *ilcsoft
+  <<: *ILCSOFT
   download:
     handler: svn
     param:
       url: http://llrforge.in2p3.fr/svn/Mokka/tags/mokka-{version}
 
-MySQL:
-  post_check:
-    handler: lib
+Druid:
+  <<: *ILCSOFT
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/Druid/tags/{version}
+  compile:
+    handler: make
+    param:
+      make_root: src
