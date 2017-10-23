@@ -1,3 +1,4 @@
+import os
 import pprint
 
 from cepcenv.util import ensure_list
@@ -5,10 +6,10 @@ from cepcenv.util import call
 
 from cepcenv.loader import load_relative
 
-format_output = load_relative('util', 'format_output')
-
 
 def compile(param):
+    log_file = os.path.join(param['pkg_config']['log_dir'], 'compile_cmake.log')
+
     source_dir = param['pkg_config']['source_dir']
     build_dir = param['pkg_config']['build_dir']
     install_dir = param['pkg_config']['install_dir']
@@ -39,32 +40,29 @@ def compile(param):
     make_opt = ensure_list(make_opt)
 
 
-    final_out = ''
-    final_err = ''
-    final_out += ('all env:\n' + pprint.pformat(env) + '\n')
+    with open(log_file, 'w') as f:
+        f.write('all env:\n' + pprint.pformat(env) + '\n')
+        f.flush()
 
-    cmd = ['cmake', source_dir] + cmake_args
-    ret, out, err = call(cmd, cwd=build_dir, env=env)
-    final_out += (str(cmd) + '\n')
-    final_out += format_output(out)
-    final_err += format_output(err)
+        cmd = ['cmake', source_dir] + cmake_args
+        f.write(str(cmd) + '\n\n')
+        f.flush()
+        ret, out, err = call(cmd, cwd=build_dir, env=env, stdout=f)
 
-    if ret != 0:
-        return {'ok': ret==0, 'log': {'stdout': final_out, 'stderr': final_err}}
+        if ret != 0:
+            return False
 
-    cmd = ['make'] + make_opt
-    ret, out, err = call(cmd, cwd=build_dir, env=env)
-    final_out += (str(cmd) + '\n')
-    final_out += format_output(out)
-    final_err += format_output(err)
+        cmd = ['make'] + make_opt
+        f.write(str(cmd) + '\n\n')
+        f.flush()
+        ret, out, err = call(cmd, cwd=build_dir, env=env, stdout=f)
 
-    if ret != 0:
-        return {'ok': ret==0, 'log': {'stdout': final_out, 'stderr': final_err}}
+        if ret != 0:
+            return False
 
-    cmd = ['make'] + install_args
-    ret, out, err = call(cmd, cwd=build_dir, env=env)
-    final_out += (str(cmd) + '\n')
-    final_out += format_output(out)
-    final_err += format_output(err)
+        cmd = ['make'] + install_args
+        f.write(str(cmd) + '\n\n')
+        f.flush()
+        ret, out, err = call(cmd, cwd=build_dir, env=env, stdout=f)
 
-    return {'ok': ret==0, 'log': {'stdout': final_out, 'stderr': final_err}}
+    return ret==0

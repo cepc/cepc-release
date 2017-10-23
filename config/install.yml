@@ -71,7 +71,7 @@ QT:
   download:
     handler: http
     param:
-      url: http://download.qt-project.org/archive/qt/{version:.3}/qt-everywhere-opensource-src-{version}.tar.gz
+      url: http://download.qt.io/archive/qt/{version:.3}/qt-everywhere-opensource-src-{version}.tar.gz
   extract:
     handler: tar
     param:

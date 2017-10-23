@@ -1,0 +1,5 @@
+category: [cepcsoft, external]
+
+category_root:
+  external: '{release_root}/{platform}/external'
+  cepcsoft: '{release_root}/{platform}/cepcsoft/{version}'

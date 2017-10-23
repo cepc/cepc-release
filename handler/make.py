@@ -5,10 +5,10 @@ from cepcenv.util import call
 
 from cepcenv.loader import load_relative
 
-format_output = load_relative('util', 'format_output')
-
 
 def compile(param):
+    log_file = os.path.join(param['pkg_config']['log_dir'], 'compile_make.log')
+
     source_dir = param['pkg_config']['source_dir']
 
     make_root = param['action_param'].get('make_root', '')
@@ -24,11 +24,7 @@ def compile(param):
     make_opt = ensure_list(make_opt)
 
 
-    final_out = ''
-    final_err = ''
+    with open(log_file, 'w') as f:
+        ret, out, err = call(['make']+make_opt, cwd=make_root, env=env, stdout=f)
 
-    ret, out, err = call(['make']+make_opt, cwd=make_root, env=env)
-    final_out += format_output(out)
-    final_err += format_output(err)
-
-    return {'ok': ret==0, 'log': {'stdout': final_out, 'stderr': final_err}}
+    return ret==0

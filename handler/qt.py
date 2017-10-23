@@ -5,10 +5,10 @@ from cepcenv.util import call
 
 from cepcenv.loader import load_relative
 
-format_output = load_relative('util', 'format_output')
-
 
 def compile(param):
+    log_file = os.path.join(param['pkg_config']['log_dir'], 'compile_qt.log')
+
     source_dir = param['pkg_config']['source_dir']
     build_dir = param['pkg_config']['build_dir']
     install_dir = param['pkg_config']['install_dir']
@@ -28,25 +28,21 @@ def compile(param):
     configure_path = os.path.join(source_dir, 'configure')
 
 
-    final_out = ''
-    final_err = ''
+    with open(log_file, 'w') as f:
+        f.write('='*80 + '\n')
+        f.flush()
+        ret, out, err = call([configure_path, '-prefix', install_dir]+configure_args, cwd=build_dir, env=env, input=b'yes\n', stdout=f)
+        if ret != 0:
+            return False
 
-    ret, out, err = call([configure_path, '-prefix', install_dir]+configure_args, cwd=build_dir, env=env, input=b'yes\n')
-    final_out += format_output(out)
-    final_err += format_output(err)
+        f.write('\n' + '='*80 + '\n')
+        f.flush()
+        ret, out, err = call(['make']+make_opt, cwd=build_dir, env=env, stdout=f)
+        if ret != 0:
+            return False
 
-    if ret != 0:
-        return {'ok': ret==0, 'log': {'stdout': final_out, 'stderr': final_err}}
+        f.write('\n' + '='*80 + '\n')
+        f.flush()
+        ret, out, err = call(['make']+install_args, cwd=build_dir, env=env, stdout=f)
 
-    ret, out, err = call(['make']+make_opt, cwd=build_dir, env=env)
-    final_out += format_output(out)
-    final_err += format_output(err)
-
-    if ret != 0:
-        return {'ok': ret==0, 'log': {'stdout': final_out, 'stderr': final_err}}
-
-    ret, out, err = call(['make']+install_args, cwd=build_dir, env=env)
-    final_out += format_output(out)
-    final_err += format_output(err)
-
-    return {'ok': ret==0, 'log': {'stdout': final_out, 'stderr': final_err}}
+    return ret==0
