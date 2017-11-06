@@ -114,6 +114,7 @@ ILCUTIL:
 
 LCIO:
   <<: *CEPCSOFT_DEFAULT
+  dep: [CLHEP, ROOT]
   path:
     <<: *CEPCSOFT_PATH_DEFAULT
     bin: '{install_dir}/bin'
@@ -124,7 +125,7 @@ LCIO:
 
 GEAR:
   <<: *CEPCSOFT_DEFAULT
-  dep: [CLHEP, ILCUTIL]
+  dep: [ROOT, CLHEP, ILCUTIL]
   path:
     <<: *CEPCSOFT_PATH_DEFAULT
     bin: '{install_dir}/bin'

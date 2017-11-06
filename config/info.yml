@@ -1,5 +1,14 @@
-category: [cepcsoft, external]
+extra_version_config_items: [work_root]
 
-category_root:
-  external: '{release_root}/{platform}/external'
-  cepcsoft: '{release_root}/{platform}/cepcsoft/{version}'
+category: [work, cepcsoft, external, system]
+
+categories:
+  system:
+    pre_install: true
+  external:
+    root: '{release_root}/{platform}/external'
+  cepcsoft:
+    root: '{release_root}/{platform}/cepcsoft/{version}'
+  work:
+    auto_package: true
+    root: '{work_root}'
