@@ -11,4 +11,4 @@ categories:
     root: '{release_root}/{platform}/cepcsoft/{version}'
   work:
     auto_package: true
-    root: '{work_root}'
+#    root: '{work_root}'
