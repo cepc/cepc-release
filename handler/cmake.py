@@ -5,6 +5,7 @@ from cepcenv.util import ensure_list
 from cepcenv.util import call
 
 from cepcenv.loader import load_relative
+auto_make_jobs = load_relative('util', 'auto_make_jobs')
 
 
 def compile(param):
@@ -38,6 +39,7 @@ def compile(param):
 
     make_opt = param['config'].get('make_opt', '')
     make_opt = ensure_list(make_opt)
+    make_opt = auto_make_jobs(make_opt)
 
 
     with open(log_file, 'w') as f:

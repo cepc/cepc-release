@@ -4,6 +4,7 @@ from cepcenv.util import ensure_list
 from cepcenv.util import call
 
 from cepcenv.loader import load_relative
+auto_make_jobs = load_relative('util', 'auto_make_jobs')
 
 
 def compile(param):
@@ -24,25 +25,32 @@ def compile(param):
 
     make_opt = param['config'].get('make_opt', '')
     make_opt = ensure_list(make_opt)
+    make_opt = auto_make_jobs(make_opt)
 
     configure_path = os.path.join(source_dir, 'configure')
 
 
     with open(log_file, 'w') as f:
+        cmd = [configure_path, '--prefix='+install_dir] + configure_args
         f.write('='*80 + '\n')
+        f.write('{0}\n'.format(cmd))
         f.flush()
-        ret, out, err = call([configure_path, '--prefix='+install_dir]+configure_args, cwd=build_dir, env=env, stdout=f)
+        ret, out, err = call(cmd, cwd=build_dir, env=env, stdout=f)
         if ret != 0:
             return False
 
+        cmd = ['make'] + make_opt
         f.write('\n' + '='*80 + '\n')
+        f.write('{0}\n'.format(cmd))
         f.flush()
-        ret, out, err = call(['make']+make_opt, cwd=build_dir, env=env, stdout=f)
+        ret, out, err = call(cmd, cwd=build_dir, env=env, stdout=f)
         if ret != 0:
             return False
 
+        cmd = ['make'] + install_args
         f.write('\n' + '='*80 + '\n')
+        f.write('{0}\n'.format(cmd))
         f.flush()
-        ret, out, err = call(['make']+install_args, cwd=build_dir, env=env, stdout=f)
+        ret, out, err = call(cmd, cwd=build_dir, env=env, stdout=f)
 
     return ret==0
