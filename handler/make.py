@@ -21,7 +21,7 @@ def compile(param):
 
     env = param.get('env')
 
-    make_opt = param['config'].get('make_opt', '')
+    make_opt = param['config'].get('make_opt', [])
     make_opt = ensure_list(make_opt)
     make_opt = auto_make_jobs(make_opt)
 
