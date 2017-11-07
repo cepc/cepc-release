@@ -54,6 +54,7 @@ LCIO:
   category: cepcsoft
   path: Framework
 
+
 GEAR:
   version: 01-04
   category: cepcsoft
@@ -64,7 +65,29 @@ Mokka:
   category: cepcsoft
   path: Simulation
 
+
 Druid:
   version: '2.2'
   category: cepcsoft
   path: EventDisplay
+
+#CED:
+#  version: 01-09-01
+#  category: cepcsoft
+#  path: EventDisplay
+#
+#CEDViewer:
+#  version: 01-07-02
+#  category: cepcsoft
+#  path: EventDisplay
+#
+#
+#LCCD:
+#  version: 01-03
+#  category: cepcsoft
+#  path: Simulation
+#
+#NNNN:
+#  version: 
+#  category: cepcsoft
+#  path: kkkk

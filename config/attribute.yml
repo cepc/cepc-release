@@ -147,3 +147,29 @@ Druid:
     home: '{install_dir}'
     src: '{source_dir}'
     bin: '{install_dir}/bin'
+
+CED:
+  <<: *CEPCSOFT_DEFAULT
+  path:
+    <<: *CEPCSOFT_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    inc: '{install_dir}/include'
+    lib: '{install_dir}/lib'
+
+CEDViewer:
+  <<: *CEPCSOFT_DEFAULT
+  dep: [Marlin, MarlinUtil, LCIO, GEAR, CLHEP, GSL, CED]
+  path:
+    <<: *CEPCSOFT_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    inc: '{install_dir}/include'
+    lib: '{install_dir}/lib'
+
+
+LCCD:
+  <<: *CEPCSOFT_DEFAULT
+  dep: LCIO
+  path:
+    <<: *CEPCSOFT_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'

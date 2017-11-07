@@ -6,17 +6,12 @@ def extract(param):
 
     tar_file_name = param['action_param']['file'].format(**param['pkg_config'])
     tar_file = os.path.join(param['pkg_config']['download_dir'], tar_file_name)
-    dst_dir = param['pkg_config']['extract_dir']
+    main_dir = param['action_param']['main'].format(**param['pkg_config'])
+    dst_dir = param['pkg_config']['source_dir']
 
-#    if tar_file_name.endswith('.tar.gz') or tar_file_name.endswith('.tgz'):
-#        extract_arg = 'xvzf'
-#    elif tar_file_name.endswith('.tar.bz2'):
-#        extract_arg = 'xvjf'
-#    else:
-#        extract_arg = 'xvf'
+    strip_number = main_dir.strip(os.sep).count(os.sep) + 1
 
-#    cmd = ['tar', extract_arg, tar_file]
-    cmd = ['tar', 'xvf', tar_file]
+    cmd = ['tar', '--strip-components', str(strip_number), '-xvf', tar_file, main_dir]
 
     with open(log_file, 'w') as f:
         ret, out, err = call(cmd, cwd=dst_dir, stdout=f)

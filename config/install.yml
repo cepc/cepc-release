@@ -7,9 +7,6 @@ gcc:
     handler: tar
     param:
       file: gcc-{version}.tar.gz
-  source:
-    handler: copy
-    param:
       main: gcc-{version}
   pre_check:
     handler: gcc
@@ -30,9 +27,6 @@ CMake:
     handler: tar
     param:
       file: cmake-{version}.tar.gz
-  source:
-    handler: copy
-    param:
       main: cmake-{version}
   pre_check:
     handler: ppp
@@ -56,9 +50,6 @@ XercesC:
     handler: tar
     param:
       file: xerces-c-{version}.tar.gz
-  source:
-    handler: copy
-    param:
       main: xerces-c-{version}
   pre_check:
     handler: ppp
@@ -76,9 +67,6 @@ QT:
     handler: tar
     param:
       file: qt-everywhere-opensource-src-{version}.tar.gz
-  source:
-    handler: copy
-    param:
       main: qt-everywhere-opensource-src-{version}
   pre_check:
     handler: ppp
@@ -98,9 +86,6 @@ CLHEP:
     handler: tar
     param:
       file: clhep-{version}.tgz
-  source:
-    handler: copy
-    param:
       main: '{version}/CLHEP'
   pre_check:
     handler: ppp
@@ -118,9 +103,6 @@ GSL:
     handler: tar
     param:
       file: gsl-{version}.tar.gz
-  source:
-    handler: copy
-    param:
       main: gsl-{version}
   pre_check:
     handler: ppp
@@ -138,9 +120,6 @@ ROOT:
     handler: tar
     param:
       file: root_v{version}.source.tar.gz
-  source:
-    handler: copy
-    param:
       main: root
   pre_check:
     handler: ppp
@@ -173,9 +152,6 @@ Geant4:
     handler: tar
     param:
       file: geant4.{version}.tar.gz
-  source:
-    handler: copy
-    param:
       main: geant4.{version}
   pre_check:
     handler: ppp
@@ -261,3 +237,39 @@ Druid:
     handler: make
     param:
       make_root: src
+
+CED:
+  <<: *ILCSOFT
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/marlinreco/CED/tags/v{version}
+  compile:
+    handler: cmake
+    param:
+      ignore_install_prefix: True
+      envcmake:
+        <<: *ILCSOFT_ENVCMAKE
+        CED_SERVER: 'ON'
+
+CEDViewer:
+  <<: *ILCSOFT
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/marlinreco/CEDViewer/tags/v{version}
+
+
+LCCD:
+  <<: *ILCSOFT
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/lccd/lccd/tags/v{version}
+  compile:
+    handler: cmake
+    param:
+      ignore_install_prefix: True
+      envcmake:
+        <<: *ILCSOFT_ENVCMAKE
+        LCCD_CONDDBMYSQL: 'OFF'
