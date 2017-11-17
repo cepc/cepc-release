@@ -1,90 +1,112 @@
-external_path_default: &EXTERNAL_PATH_DEFAULT
+common_path_default: &COMMON_PATH_DEFAULT
   home: '{install_dir}'
   src: '{source_dir}'
 
-cepcsoft_path_default: &CEPCSOFT_PATH_DEFAULT
-  <<: *EXTERNAL_PATH_DEFAULT
+cmake_path_default: &CMAKE_PATH_DEFAULT
+  <<: *COMMON_PATH_DEFAULT
   cmake: '{install_dir}'
 
 
-external_default: &EXTERNAL_DEFAULT
-  location:
-    source: source
-    build: build
-    install: install
+common_location_default: &COMMON_LOCATION_DEFAULT
+  source: source
+  build: build
+  install: install
 
-cepcsoft_default: &CEPCSOFT_DEFAULT
-  location:
-    source: ''
-    build: build
-    install: ''
+ilcutil_location_default: &ILCUTIL_LOCATION_DEFAULT
+  source: ''
+  build: build
+  install: ''
 
 
-gcc:
-  <<: *EXTERNAL_DEFAULT
+GCC:
   basic: true
+  location:
+    <<: *COMMON_LOCATION_DEFAULT
   path:
-    <<: *EXTERNAL_PATH_DEFAULT
+    <<: *COMMON_PATH_DEFAULT
     bin: '{install_dir}/bin'
-    lib: '{install_dir}/lib64'
+    library: '{install_dir}/lib64'
     man: '{install_dir}/share/man'
 
 CMake:
-  <<: *EXTERNAL_DEFAULT
   basic: true
-  dep: gcc
+  dep: GCC
+  location:
+    <<: *COMMON_LOCATION_DEFAULT
   path:
-    <<: *EXTERNAL_PATH_DEFAULT
+    <<: *COMMON_PATH_DEFAULT
     bin: '{install_dir}/bin'
-    lib: '{install_dir}/lib'
+    library: '{install_dir}/lib'
     man: '{install_dir}/man'
 
 
 XercesC:
-  <<: *EXTERNAL_DEFAULT
+  location:
+    <<: *COMMON_LOCATION_DEFAULT
   path:
-    <<: *EXTERNAL_PATH_DEFAULT
+    <<: *COMMON_PATH_DEFAULT
     bin: '{install_dir}/bin'
-    inc: '{install_dir}/include'
     lib: '{install_dir}/lib'
+    library: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+
+QT:
+  location:
+    <<: *COMMON_LOCATION_DEFAULT
+  path:
+    <<: *COMMON_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    lib: '{install_dir}/lib64'
+    library: '{install_dir}/lib64'
+    inc: '{install_dir}/include'
+
+CLHEP:
+  location:
+    <<: *COMMON_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    lib: '{install_dir}/lib'
+    library: '{install_dir}/lib'
+    inc: '{install_dir}/include'
 
 GSL:
-  <<: *EXTERNAL_DEFAULT
+  location:
+    <<: *COMMON_LOCATION_DEFAULT
   path:
-    <<: *EXTERNAL_PATH_DEFAULT
+    <<: *COMMON_PATH_DEFAULT
     bin: '{install_dir}/bin'
-    inc: '{install_dir}/include'
     lib: '{install_dir}/lib'
+    library: '{install_dir}/lib'
+    inc: '{install_dir}/include'
     man: '{install_dir}/share/man'
     info: '{install_dir}/share/info'
 
-QT:
-  <<: *EXTERNAL_DEFAULT
+ROOT:
+  location:
+    <<: *COMMON_LOCATION_DEFAULT
   path:
-    <<: *EXTERNAL_PATH_DEFAULT
+    <<: *COMMON_PATH_DEFAULT
     bin: '{install_dir}/bin'
-    inc: '{install_dir}/include'
-    lib: '{install_dir}/lib64'
-
-CLHEP:
-  <<: *EXTERNAL_DEFAULT
-  path:
-    <<: *EXTERNAL_PATH_DEFAULT
-    bin: '{install_dir}/bin'
-    inc: '{install_dir}/include'
     lib: '{install_dir}/lib'
-    cmake: '{install_dir}'
+    library: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+    man: '{install_dir}/man'
+  env:
+    ROOTSYS: '{install_dir}'
 
 Geant4:
-  <<: *EXTERNAL_DEFAULT
   dep: [QT, CLHEP, XercesC]
+  location:
+    <<: *COMMON_LOCATION_DEFAULT
   path:
-    <<: *EXTERNAL_PATH_DEFAULT
+    <<: *CMAKE_PATH_DEFAULT
     bin: '{install_dir}/bin'
-    inc: '{install_dir}/include'
     lib: '{install_dir}/lib64'
-    cmake: '{install_dir}'
+    library: '{install_dir}/lib64'
+    inc: '{install_dir}/include'
   env:
+    G4INSTALL: '{install_dir}'
     G4NEUTRONHPDATA: '{install_dir}/share/Geant4-9.6.2/data/G4NDL4.2'
     G4LEDATA: '{install_dir}/share/Geant4-9.6.2/data/G4EMLOW6.32'
     G4LEVELGAMMADATA: '{install_dir}/share/Geant4-9.6.2/data/PhotonEvaporation2.3'
@@ -94,82 +116,417 @@ Geant4:
     G4REALSURFACEDATA: '{install_dir}/share/Geant4-9.6.2/data/RealSurface1.0'
     G4SAIDXSDATA: '{install_dir}/share/Geant4-9.6.2/data/G4SAIDDATA1.1'
 
-ROOT:
-  <<: *EXTERNAL_DEFAULT
-  path:
-    <<: *EXTERNAL_PATH_DEFAULT
-    bin: '{install_dir}/bin'
-    inc: '{install_dir}/include'
-    lib: '{install_dir}/lib'
-    man: '{install_dir}/man'
-  env:
-    ROOTSYS: '{install_dir}'
-
 
 ILCUTIL:
-  <<: *CEPCSOFT_DEFAULT
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
   path:
-    <<: *CEPCSOFT_PATH_DEFAULT
+    <<: *CMAKE_PATH_DEFAULT
     lib: '{install_dir}/lib'
+    library: '{install_dir}/lib'
+    inc: '{install_dir}/include'
 
 LCIO:
-  <<: *CEPCSOFT_DEFAULT
-  dep: [CLHEP, ROOT]
+  dep: [CLHEP, ROOT, ILCUTIL]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
   path:
-    <<: *CEPCSOFT_PATH_DEFAULT
+    <<: *CMAKE_PATH_DEFAULT
     bin: '{install_dir}/bin'
-    inc: '{install_dir}/include'
     lib: '{install_dir}/lib'
+    library: '{install_dir}/lib'
+    inc: '{install_dir}/include'
   env:
     LCIO: '{install_dir}'
 
 GEAR:
-  <<: *CEPCSOFT_DEFAULT
-  dep: [ROOT, CLHEP, ILCUTIL]
+  dep: [CLHEP, ROOT, ILCUTIL]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
   path:
-    <<: *CEPCSOFT_PATH_DEFAULT
+    <<: *CMAKE_PATH_DEFAULT
     bin: '{install_dir}/bin'
-    inc: '{install_dir}/include'
     lib: '{install_dir}/lib'
+    library: '{install_dir}/lib'
+    inc: '{install_dir}/include'
 
 Mokka:
-  <<: *CEPCSOFT_DEFAULT
-  dep: [LCIO, GEAR, Geant4, MySQL, ILCUTIL]
+  dep: [Geant4, MySQL, ILCUTIL, LCIO, GEAR]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
   path:
-    <<: *CEPCSOFT_PATH_DEFAULT
+    <<: *CMAKE_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    lib: '{install_dir}/lib'
+
+CondDBMySQL:
+  dep: [MySQL, ILCUTIL]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
     bin: '{install_dir}/bin'
     lib: '{install_dir}/lib'
 
 Druid:
-  <<: *CEPCSOFT_DEFAULT
   dep: [LCIO, GEAR, ROOT]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
   path:
-    home: '{install_dir}'
-    src: '{source_dir}'
+    <<: *COMMON_PATH_DEFAULT
     bin: '{install_dir}/bin'
 
 CED:
-  <<: *CEPCSOFT_DEFAULT
+  dep: [GLUT, OpenGL, ILCUTIL]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
   path:
-    <<: *CEPCSOFT_PATH_DEFAULT
+    <<: *CMAKE_PATH_DEFAULT
     bin: '{install_dir}/bin'
-    inc: '{install_dir}/include'
     lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
 
 CEDViewer:
-  <<: *CEPCSOFT_DEFAULT
-  dep: [Marlin, MarlinUtil, LCIO, GEAR, CLHEP, GSL, CED]
+  dep: [CLHEP, GSL, ILCUTIL, LCIO, GEAR, Marlin, MarlinUtil, CED, LCCD]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
   path:
-    <<: *CEPCSOFT_PATH_DEFAULT
+    <<: *CMAKE_PATH_DEFAULT
     bin: '{install_dir}/bin'
-    inc: '{install_dir}/include'
     lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+    marlin: '{install_dir}/lib/libCEDViewer.so'
 
+FastJet:
+  location:
+    <<: *COMMON_LOCATION_DEFAULT
+  path:
+    <<: *COMMON_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    lib: '{install_dir}/lib'
+    library: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+
+FastJetClustering:
+  dep: [ROOT, ILCUTIL, Marlin, MarlinUtil, CLHEP, GEAR, GSL, LCIO, FastJet]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+    marlin: '{install_dir}/lib/libFastJetClustering.so'
+
+MarlinFastJet:
+  dep: [ILCUTIL, LCIO, Marlin, FastJet, RAIDA]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+    marlin: '{install_dir}/lib/libMarlinFastJet.so'
+
+KalTest:
+  dep: [ILCUTIL, ROOT]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    lib: '{install_dir}/lib'
+    library: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+
+KalDet:
+  dep: [ROOT, ILCUTIL, LCIO, GEAR, KalTest, Marlin, MarlinUtil]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+
+GBL:
+  dep: [ROOT, ILCUTIL]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
 
 LCCD:
-  <<: *CEPCSOFT_DEFAULT
-  dep: LCIO
+  dep: [ILCUTIL, LCIO]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
   path:
-    <<: *CEPCSOFT_PATH_DEFAULT
+    <<: *CMAKE_PATH_DEFAULT
     lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+
+RAIDA:
+  dep: [ROOT, ILCUTIL]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+
+MarlinUtil:
+  dep: [CLHEP, GSL, ILCUTIL, GEAR, LCIO, Marlin, CED]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+
+Marlin:
+  dep: [CLHEP, QT, ILCUTIL, LCIO, GEAR, LCCD, RAIDA]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+
+MarlinReco:
+  dep: [CLHEP, GSL, ROOT, ILCUTIL, Marlin, MarlinUtil, GEAR, LCIO, RAIDA]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    marlin: '{install_dir}/lib/libMarlinReco.so'
+
+MarlinTrk:
+  dep: [GSL, CLHEP, ROOT, ILCUTIL, LCIO, GEAR, Marlin, MarlinUtil, KalTest, KalDet, RAIDA]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+
+MarlinTrkProcessors:
+  dep: [ROOT, GSL, ILCUTIL, LCIO, Marlin, MarlinUtil, KalTest, KalDet, MarlinTrk, KiTrack, KiTrackMarlin, RAIDA]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    marlin: '{install_dir}/lib/libMarlinTrkProcessors.so'
+
+Clupatra:
+  dep: [ROOT, GSL, ILCUTIL, LCIO, RAIDA, Marlin, MarlinUtil, KalTest, MarlinTrk]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+    marlin: '{install_dir}/lib/libClupatra.so'
+
+LCFIVertex:
+  dep: [ILCUTIL, Marlin, MarlinUtil, LCIO, GEAR, RAIDA]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+    marlin: '{install_dir}/lib/libLCFIVertex.so'
+
+LCFIPlus:
+  dep: [ILCUTIL, LCIO, GEAR, ROOT, Marlin, MarlinUtil, LCFIVertex]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+    marlin: '{install_dir}/lib/libLCFIPlus.so'
+
+KiTrack:
+  dep: [ROOT, ILCUTIL, Marlin]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+
+KiTrackMarlin:
+  dep: [GSL, CLHEP, ROOT, ILCUTIL, Marlin, MarlinUtil, KiTrack, MarlinTrk]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+
+ForwardTracking:
+  dep: [ROOT, GSL, CLHEP, ILCUTIL, LCIO, GEAR, Marlin, MarlinUtil, MarlinTrk, KiTrack, KiTrackMarlin, RAIDA]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+    marlin: '{install_dir}/lib/libForwardTracking.so'
+
+MarlinKinfit:
+  dep: [GSL, CLHEP, ROOT, ILCUTIL, LCIO, GEAR, Marlin, RAIDA]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+
+PandoraPFANew:
+  dep: [ROOT, ILCUTIL]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+    library: '{install_dir}/lib'
+
+MarlinPandora:
+  dep: [ILCUTIL, Marlin, MarlinUtil, GEAR, PandoraPFANew, LCIO]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    inc: '{install_dir}/include'
+    lib: '{install_dir}/lib'
+    marlin: '{install_dir}/lib/libMarlinPandora.so'
+
+PandoraAnalysis:
+  dep: [ROOT, ILCUTIL, Marlin, MarlinUtil, GEAR, LCIO]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+    marlin: '{install_dir}/lib/libPandoraAnalysis.so'
+
+Overlay:
+  dep: [ROOT, ILCUTIL, Marlin, MarlinUtil, GEAR, LCIO]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+    marlin: '{install_dir}/lib/libOverlay.so'
+
+PathFinder:
+  dep: [ROOT, ILCUTIL]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+
+MarlinTPC:
+  dep: [GSL, ROOT, CLHEP, ILCUTIL, LCIO, GEAR, Marlin, LCCD, RAIDA, KalTest, KalDet, Mokka, PathFinder, GBL]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+    marlin: '{install_dir}/lib/libMarlinTPC.so'
+
+LCTuple:
+  dep: [ROOT, ILCUTIL, LCIO, Marlin, RAIDA]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+    marlin: '{install_dir}/lib/libLCTuple.so'
+
+BBQ:
+  dep: [ROOT, ILCUTIL, LCIO, GEAR]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+
+Garlic:
+  dep: [ROOT, ILCUTIL, LCIO, GEAR, Marlin, MarlinUtil]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+    marlin: '{install_dir}/lib/libGarlic.so'
+
+HepPDT:
+  location:
+    <<: *COMMON_LOCATION_DEFAULT
+  path:
+    <<: *COMMON_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    library: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+
+GDML:
+  dep: [XercesC, Geant4, ILCUTIL]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    library: '{install_dir}/lib'
+
+LCDD:
+  dep: [XercesC, Geant4, ILCUTIL, GDML]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    lib: '{install_dir}/lib'
+    library: '{install_dir}/lib'
+    inc: '{install_dir}/include'
+  env:
+    GDML_SCHEMA_DIR: '{install_dir}'
+
+SLIC:
+  dep: [XercesC, Geant4, ILCUTIL, LCIO, LCDD, GDML, HepPDT]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    bin: '{build_dir}/bin'
+    inc: '{install_dir}/include'
+
+DD4hep:
+  dep: [XercesC, ROOT, Geant4, CLHEP, LCIO, GEAR]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    bin: '{install_dir}/bin'
+    lib: '{install_dir}/lib'
+    library: '{install_dir}/lib'
     inc: '{install_dir}/include'

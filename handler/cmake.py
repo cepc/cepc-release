@@ -50,7 +50,6 @@ def compile(param):
         f.write(str(cmd) + '\n\n')
         f.flush()
         ret, out, err = call(cmd, cwd=build_dir, env=env, stdout=f)
-
         if ret != 0:
             return False
 
@@ -58,13 +57,15 @@ def compile(param):
         f.write(str(cmd) + '\n\n')
         f.flush()
         ret, out, err = call(cmd, cwd=build_dir, env=env, stdout=f)
-
         if ret != 0:
             return False
 
-        cmd = ['make'] + install_args
-        f.write(str(cmd) + '\n\n')
-        f.flush()
-        ret, out, err = call(cmd, cwd=build_dir, env=env, stdout=f)
+        if param['action_param'].get('do_make_install', True):
+            cmd = ['make'] + install_args
+            f.write(str(cmd) + '\n\n')
+            f.flush()
+            ret, out, err = call(cmd, cwd=build_dir, env=env, stdout=f)
+            if ret != 0:
+                return False
 
-    return ret==0
+    return True

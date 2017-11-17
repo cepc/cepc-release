@@ -1,4 +1,17 @@
-gcc:
+GCCSys:
+  post_check:
+    handler: lib
+
+Make:
+  post_check:
+    handler: lib
+
+MySQL:
+  post_check:
+    handler: lib
+
+
+GCC:
   download:
     handler: http
     param:
@@ -32,11 +45,6 @@ CMake:
     handler: ppp
   compile:
     handler: conf_make
-  post_check:
-    handler: lib
-
-
-MySQL:
   post_check:
     handler: lib
 
@@ -173,10 +181,10 @@ Geant4:
 ilcsoft_base: &ILCSOFT
   pre_check:
     handler: ppp
-  compile:
+  compile: &ILCSOFT_COMPILE
     handler: cmake
-    param:
-      ignore_install_prefix: True
+    param: &ILCSOFT_CMAKE_PARAM
+      ignore_install_prefix: true
       envcmake: &ILCSOFT_ENVCMAKE
         BUILD_32BIT_COMPATIBLE: 'OFF'
         INSTALL_DOC: 'OFF'
@@ -184,29 +192,17 @@ ilcsoft_base: &ILCSOFT
   post_check:
     handler: lib
 
+
 ILCUTIL:
-  <<: *ILCSOFT
   download:
     handler: svn
     param:
       url: https://svnsrv.desy.de/public/ilctools/ilcutil/tags/v{version}
-
-GEAR:
-  <<: *ILCSOFT
-  download:
-    handler: svn
-    param:
-      url: https://svnsrv.desy.de/public/gear/gear/tags/v{version}
   compile:
-    handler: cmake
-    param:
-      ignore_install_prefix: True
-      envcmake:
-        <<: *ILCSOFT_ENVCMAKE
-        GEAR_TGEO: 'ON'
+    <<: *ILCSOFT_COMPILE
+
 
 LCIO:
-  <<: *ILCSOFT
   download:
     handler: svn
     param:
@@ -214,21 +210,42 @@ LCIO:
   compile:
     handler: cmake
     param:
-      ignore_install_prefix: True
+      ignore_install_prefix: true
       envcmake:
         <<: *ILCSOFT_ENVCMAKE
         BUILD_ROOTDICT: 'ON'
         INSTALL_JAR: 'OFF'
 
+GEAR:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/gear/gear/tags/v{version}
+  compile:
+    handler: cmake
+    param:
+      ignore_install_prefix: true
+      envcmake:
+        <<: *ILCSOFT_ENVCMAKE
+        GEAR_TGEO: 'ON'
+
 Mokka:
-  <<: *ILCSOFT
   download:
     handler: svn
     param:
       url: http://llrforge.in2p3.fr/svn/Mokka/tags/mokka-{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+CondDBMySQL:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/calice/CondDBMySQL/tags/CondDBMySQL_ILC-{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
 
 Druid:
-  <<: *ILCSOFT
   download:
     handler: svn
     param:
@@ -239,7 +256,6 @@ Druid:
       make_root: src
 
 CED:
-  <<: *ILCSOFT
   download:
     handler: svn
     param:
@@ -247,21 +263,76 @@ CED:
   compile:
     handler: cmake
     param:
-      ignore_install_prefix: True
+      ignore_install_prefix: true
       envcmake:
         <<: *ILCSOFT_ENVCMAKE
         CED_SERVER: 'ON'
 
 CEDViewer:
-  <<: *ILCSOFT
   download:
     handler: svn
     param:
       url: https://svnsrv.desy.de/public/marlinreco/CEDViewer/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
 
+FastJet:
+  download:
+    handler: http
+    param:
+      #url: http://www.lpthe.jussieu.fr/~salam/fastjet/repo/fastjet-{version}.tar.gz
+      url: http://fastjet.fr/repo/fastjet-{version}.tar.gz
+  extract:
+    handler: tar
+    param:
+      file: fastjet-{version}.tar.gz
+      main: fastjet-{version}
+  compile:
+    handler: conf_make
+    param:
+      configure: --enable-shared
+
+FastJetClustering:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/marlinreco/FastJetClustering/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+MarlinFastJet:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/marlinreco/MarlinFastJet/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+KalTest:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/kaltest/KalTest/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+KalDet:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/kaltest/KalDet/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+GBL:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/GeneralBrokenLines/tags/V{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
 
 LCCD:
-  <<: *ILCSOFT
   download:
     handler: svn
     param:
@@ -269,7 +340,267 @@ LCCD:
   compile:
     handler: cmake
     param:
-      ignore_install_prefix: True
+      ignore_install_prefix: true
       envcmake:
         <<: *ILCSOFT_ENVCMAKE
         LCCD_CONDDBMYSQL: 'OFF'
+
+RAIDA:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/ilctools/RAIDA/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+MarlinUtil:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/marlinreco/MarlinUtil/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+Marlin:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/marlin/Marlin/tags/v{version}
+  compile:
+    handler: cmake
+    param:
+      ignore_install_prefix: true
+      envcmake:
+        <<: *ILCSOFT_ENVCMAKE
+        MARLIN_GUI: 'OFF'
+
+MarlinReco:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/marlinreco/MarlinReco/tags/v{version}
+  compile:
+    handler: cmake
+    param:
+      ignore_install_prefix: true
+      envcmake:
+        <<: *ILCSOFT_ENVCMAKE
+        MARLINRECO_FORTRAN: 'OFF'
+
+MarlinTrk:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/marlinreco/MarlinTrk/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+MarlinTrkProcessors:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/marlinreco/MarlinTrkProcessors/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+Clupatra:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/marlinreco/Clupatra/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+LCFIVertex:
+  pre_check:
+    handler: command
+    param:
+      cmd: ['tar', '-xvf', 'boot.tgz']
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/marlinreco/LCFIVertex/tags/v{version}
+  compile:
+    handler: cmake
+    param:
+      ignore_install_prefix: true
+      envcmake:
+        <<: *ILCSOFT_ENVCMAKE
+        AIDA: 'OFF'
+
+LCFIPlus:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/marlinreco/LCFIPlus/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+KiTrack:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/marlinreco/KiTrack/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+KiTrackMarlin:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/marlinreco/KiTrackMarlin/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+ForwardTracking:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/marlinreco/ForwardTracking/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+MarlinKinfit:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/marlinreco/MarlinKinfit/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+PandoraPFANew:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/PandoraPFANew/PandoraPFANew/tags/v{version}
+  compile:
+    handler: cmake
+    param:
+      ignore_install_prefix: true
+      envcmake:
+        <<: *ILCSOFT_ENVCMAKE
+        PANDORA_MONITORING: 'OFF'
+
+MarlinPandora:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/PandoraPFANew/MarlinPandora/tags/v{version}
+  compile:
+    handler: cmake
+    param:
+      ignore_install_prefix: true
+      envcmake:
+        <<: *ILCSOFT_ENVCMAKE
+        PANDORA_MONITORING: 'OFF'
+
+PandoraAnalysis:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/PandoraPFANew/PandoraAnalysis/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+Overlay:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/marlin/Overlay/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+PathFinder:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/pathfinder/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+MarlinTPC:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/marlintpc/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+LCTuple:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/marlinreco/LCTuple/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+BBQ:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/bbq/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+Garlic:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/Garlic/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+HepPDT:
+  download:
+    handler: http
+    param:
+      url: http://lcgapp.cern.ch/project/simu/HepPDT/download/HepPDT-{version}.tar.gz
+  extract:
+    handler: tar
+    param:
+      file: HepPDT-{version}.tar.gz
+      main: HepPDT-{version}
+  compile:
+    handler: conf_make
+
+GDML:
+  download:
+    handler: svn
+    param:
+      url: svn://svn.freehep.org/lcdet/projects/gdml/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+LCDD:
+  download:
+    handler: svn
+    param:
+      url: svn://svn.freehep.org/lcdet/projects/lcdd/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+
+SLIC:
+  download:
+    handler: svn
+    param:
+      url: svn://svn.freehep.org/lcdet/projects/slic/tags/v{version}
+  compile:
+    handler: cmake
+    param:
+      <<: *ILCSOFT_CMAKE_PARAM
+      do_make_install: false
+
+DD4hep:
+  download:
+    handler: svn
+    param:
+      url: https://svnsrv.desy.de/public/aidasoft/DD4hep/tags/v{version}
+  compile:
+    handler: cmake
+    param:
+      ignore_install_prefix: true
+      envcmake:
+        <<: *ILCSOFT_ENVCMAKE
+        DD4HEP_WITH_GEANT4: '0'
+        DD4HEP_USE_XERCESC: '0'
+        DD4HEP_USE_PYROOT: '0'
