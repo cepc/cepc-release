@@ -3,15 +3,15 @@ category:
   extra_config: [work_root]
   categories:
     not_used:
-      install: false
       setenv: false
     system:
-      install: false
       pre_check: true
       setenv: false
     external:
+      install: true
       root: '{release_root}/{platform}/external'
     cepcsoft:
+      install: true
       root: '{release_root}/{platform}/cepcsoft/{version}'
     work:
       auto_package: true

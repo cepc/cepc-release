@@ -14,10 +14,10 @@ OpenGL:
   category: system
 
 
-GCC:
-  category: external
-  path: Service
-  version: 4.9.4
+#GCC:
+#  category: external
+#  path: Service
+#  version: 4.9.4
 
 CMake:
   category: external
@@ -76,10 +76,10 @@ Mokka:
   path: Simulation
   version: 08-03
 
-CondDBMySQL:
-  category: not_used
-  path: Simulation
-  version: 0-9-6
+#CondDBMySQL:
+#  category: not_used
+#  path: Simulation
+#  version: 0-9-6
 
 Druid:
   category: cepcsoft
@@ -162,7 +162,7 @@ MarlinTrkProcessors:
   version: 01-10
 
 Clupatra:
-  category:
+  category: cepcsoft
   path: Reconstruction/Tracking
   version: 00-10
 
@@ -221,10 +221,10 @@ PathFinder:
   path: Analysis/SubDetectorStudy
   version: 00-06
 
-MarlinTPC:
-  category: not_used
-  path: Analysis/SubDetectorStudy/TPC
-  version: 00-16
+#MarlinTPC:
+#  category: not_used
+#  path: Analysis/SubDetectorStudy/TPC
+#  version: 00-16
 
 LCTuple:
   category: cepcsoft
@@ -261,10 +261,10 @@ SLIC:
   path: Simulation
   version: 03-01-03
 
-SlicPandora:
-  category: not_used
-  path: Reconstruction/PFA
-  version: 01-00-00
+#SlicPandora:
+#  category: not_used
+#  path: Reconstruction/PFA
+#  version: 01-00-00
 
 DD4hep:
   category: cepcsoft

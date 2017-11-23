@@ -30,7 +30,7 @@ GCC:
 
 CMake:
   basic: true
-  dep: GCC
+#  dep: GCC
   location:
     <<: *COMMON_LOCATION_DEFAULT
   path:
@@ -44,7 +44,7 @@ XercesC:
   location:
     <<: *COMMON_LOCATION_DEFAULT
   path:
-    <<: *COMMON_PATH_DEFAULT
+    <<: *CMAKE_PATH_DEFAULT
     bin: '{install_dir}/bin'
     lib: '{install_dir}/lib'
     library: '{install_dir}/lib'
@@ -201,7 +201,7 @@ FastJet:
   location:
     <<: *COMMON_LOCATION_DEFAULT
   path:
-    <<: *COMMON_PATH_DEFAULT
+    <<: *CMAKE_PATH_DEFAULT
     bin: '{install_dir}/bin'
     lib: '{install_dir}/lib'
     library: '{install_dir}/lib'
@@ -485,7 +485,7 @@ HepPDT:
   location:
     <<: *COMMON_LOCATION_DEFAULT
   path:
-    <<: *COMMON_PATH_DEFAULT
+    <<: *CMAKE_PATH_DEFAULT
     lib: '{install_dir}/lib'
     library: '{install_dir}/lib'
     inc: '{install_dir}/include'

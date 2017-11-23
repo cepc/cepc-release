@@ -328,7 +328,7 @@ GBL:
   download:
     handler: svn
     param:
-      url: https://svnsrv.desy.de/public/GeneralBrokenLines/tags/V{version}
+      url: https://svnsrv.desy.de/public/GeneralBrokenLines/tags/V{version}/cpp
   compile:
     <<: *ILCSOFT_COMPILE
 
@@ -415,7 +415,7 @@ LCFIVertex:
   pre_check:
     handler: command
     param:
-      cmd: ['tar', '-xvf', 'boot.tgz']
+      cmd: ['tar', '-xvf', 'boost.tgz']
   download:
     handler: svn
     param:
