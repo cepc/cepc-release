@@ -132,7 +132,7 @@ ROOT:
   pre_check:
     handler: ppp
   compile:
-    handler: root
+    handler: conf_make
     param:
       configure: 
         - --fail-on-missing
@@ -148,6 +148,8 @@ ROOT:
         - --with-gsl-incdir={gsl_inc_dir}
         - --with-gsl-libdir={gsl_lib_dir}
         - --enable-python
+      env_install:
+        ROOTSYS: '{root_root_dir}'
   post_check:
     handler: lib
 
@@ -180,7 +182,7 @@ Geant4:
 
 ilcsoft_base: &ILCSOFT
   pre_check:
-    handler: ppp
+    handler: env
   compile: &ILCSOFT_COMPILE
     handler: cmake
     param: &ILCSOFT_CMAKE_PARAM

@@ -1,6 +1,7 @@
 import os
 
-from cepcenv.util import call
+from cepcenv.loader import load_relative
+call_and_log = load_relative('util', 'call_and_log')
 
 def download(param):
     log_file = os.path.join(param['pkg_config']['log_dir'], 'download_svn.log')
@@ -11,6 +12,6 @@ def download(param):
 
     cmd = ['svn', 'export', '--force', url, version]
     with open(log_file, 'w') as f:
-        ret, out, err = call(cmd, cwd=dst_dir, stdout=f)
+        ret = call_and_log(cmd, log=f, cwd=dst_dir)
 
     return ret==0

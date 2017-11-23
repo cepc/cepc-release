@@ -1,10 +1,10 @@
 import os
 
 from cepcenv.util import ensure_list
-from cepcenv.util import call
 
 from cepcenv.loader import load_relative
 auto_make_jobs = load_relative('util', 'auto_make_jobs')
+call_and_log = load_relative('util', 'call_and_log')
 
 
 def compile(param):
@@ -27,6 +27,6 @@ def compile(param):
 
 
     with open(log_file, 'w') as f:
-        ret, out, err = call(['make']+make_opt, cwd=make_root, env=env, stdout=f)
+        ret = call_and_log(['make']+make_opt, log=f, cwd=make_root, env=env)
 
     return ret==0

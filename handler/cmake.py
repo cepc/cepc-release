@@ -2,10 +2,10 @@ import os
 import pprint
 
 from cepcenv.util import ensure_list
-from cepcenv.util import call
 
 from cepcenv.loader import load_relative
 auto_make_jobs = load_relative('util', 'auto_make_jobs')
+call_and_log = load_relative('util', 'call_and_log')
 
 
 def compile(param):
@@ -43,28 +43,19 @@ def compile(param):
 
 
     with open(log_file, 'w') as f:
-        f.write('all env:\n' + pprint.pformat(env) + '\n')
-        f.flush()
-
         cmd = ['cmake', source_dir] + cmake_args
-        f.write(str(cmd) + '\n\n')
-        f.flush()
-        ret, out, err = call(cmd, cwd=build_dir, env=env, stdout=f)
+        ret = call_and_log(cmd, log=f, cwd=build_dir, env=env)
         if ret != 0:
             return False
 
         cmd = ['make'] + make_opt
-        f.write(str(cmd) + '\n\n')
-        f.flush()
-        ret, out, err = call(cmd, cwd=build_dir, env=env, stdout=f)
+        ret = call_and_log(cmd, log=f, cwd=build_dir, env=env)
         if ret != 0:
             return False
 
         if param['action_param'].get('do_make_install', True):
             cmd = ['make'] + install_args
-            f.write(str(cmd) + '\n\n')
-            f.flush()
-            ret, out, err = call(cmd, cwd=build_dir, env=env, stdout=f)
+            ret = call_and_log(cmd, log=f, cwd=build_dir, env=env)
             if ret != 0:
                 return False
 

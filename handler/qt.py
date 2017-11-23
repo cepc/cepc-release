@@ -1,10 +1,10 @@
 import os
 
 from cepcenv.util import ensure_list
-from cepcenv.util import call
 
 from cepcenv.loader import load_relative
 auto_make_jobs = load_relative('util', 'auto_make_jobs')
+call_and_log = load_relative('util', 'call_and_log')
 
 
 def compile(param):
@@ -31,20 +31,14 @@ def compile(param):
 
 
     with open(log_file, 'w') as f:
-        f.write('='*80 + '\n')
-        f.flush()
-        ret, out, err = call([configure_path, '-prefix', install_dir]+configure_args, cwd=build_dir, env=env, input=b'yes\n', stdout=f)
+        ret = call_and_log([configure_path, '-prefix', install_dir]+configure_args, log=f, cwd=build_dir, env=env, input=b'yes\n')
         if ret != 0:
             return False
 
-        f.write('\n' + '='*80 + '\n')
-        f.flush()
-        ret, out, err = call(['make']+make_opt, cwd=build_dir, env=env, stdout=f)
+        ret = call_and_log(['make']+make_opt, log=f, cwd=build_dir, env=env)
         if ret != 0:
             return False
 
-        f.write('\n' + '='*80 + '\n')
-        f.flush()
-        ret, out, err = call(['make']+install_args, cwd=build_dir, env=env, stdout=f)
+        ret = call_and_log(['make']+install_args, log=f, cwd=build_dir, env=env)
 
     return ret==0
