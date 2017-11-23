@@ -42,7 +42,7 @@ CMake:
       file: cmake-{version}.tar.gz
       main: cmake-{version}
   pre_check:
-    handler: ppp
+    handler: env
   compile:
     handler: conf_make
   post_check:
@@ -60,7 +60,7 @@ XercesC:
       file: xerces-c-{version}.tar.gz
       main: xerces-c-{version}
   pre_check:
-    handler: ppp
+    handler: env
   compile:
     handler: conf_make
   post_check:
@@ -77,7 +77,7 @@ QT:
       file: qt-everywhere-opensource-src-{version}.tar.gz
       main: qt-everywhere-opensource-src-{version}
   pre_check:
-    handler: ppp
+    handler: env
   compile:
     handler: qt
     param:
@@ -96,7 +96,7 @@ CLHEP:
       file: clhep-{version}.tgz
       main: '{version}/CLHEP'
   pre_check:
-    handler: ppp
+    handler: env
   compile:
     handler: cmake
   post_check:
@@ -113,7 +113,7 @@ GSL:
       file: gsl-{version}.tar.gz
       main: gsl-{version}
   pre_check:
-    handler: ppp
+    handler: env
   compile:
     handler: conf_make
   post_check:
@@ -130,10 +130,11 @@ ROOT:
       file: root_v{version}.source.tar.gz
       main: root
   pre_check:
-    handler: ppp
+    handler: env
   compile:
     handler: conf_make
     param:
+      ignore_install_prefix: true
       configure: 
         - --fail-on-missing
         - --enable-builtin-pcre
@@ -164,7 +165,7 @@ Geant4:
       file: geant4.{version}.tar.gz
       main: geant4.{version}
   pre_check:
-    handler: ppp
+    handler: env
   compile:
     handler: cmake
     param:
@@ -200,6 +201,8 @@ ILCUTIL:
     handler: svn
     param:
       url: https://svnsrv.desy.de/public/ilctools/ilcutil/tags/v{version}
+  pre_check:
+    handler: env
   compile:
     <<: *ILCSOFT_COMPILE
 
@@ -209,6 +212,8 @@ LCIO:
     handler: svn
     param:
       url: svn://svn.freehep.org/lcio/tags/v{version}
+  pre_check:
+    handler: env
   compile:
     handler: cmake
     param:
@@ -252,6 +257,8 @@ Druid:
     handler: svn
     param:
       url: https://svnsrv.desy.de/public/Druid/tags/{version}
+  pre_check:
+    handler: env
   compile:
     handler: make
     param:

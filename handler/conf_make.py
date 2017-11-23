@@ -18,6 +18,9 @@ def compile(param):
     configure_args = ensure_list(configure_args)
     configure_args = [p.format(**param['pkg_path']) for p in configure_args]
 
+    if not param['action_param'].get('ignore_install_prefix', False):
+        configure_args.insert(0, '--prefix='+install_dir)
+
     install_args = param['action_param'].get('install', ['install'])
     install_args = ensure_list(install_args)
 
@@ -40,7 +43,7 @@ def compile(param):
 
 
     with open(log_file, 'w') as f:
-        cmd = [configure_path, '--prefix='+install_dir] + configure_args
+        cmd = [configure_path] + configure_args
         ret = call_and_log(cmd, log=f, cwd=build_dir, env=env_configure)
         if ret != 0:
             return False
