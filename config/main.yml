@@ -9,10 +9,10 @@ category:
       setenv: false
     external:
       install: true
-      root: '{release_root}/{platform}/external'
+      root: '{software_root}/{platform}/external'
     cepcsoft:
       install: true
-      root: '{release_root}/{platform}/cepcsoft/{version}'
+      root: '{software_root}/{platform}/cepcsoft/{version}'
     work:
       auto_package: true
 #      root: '{work_root}'
