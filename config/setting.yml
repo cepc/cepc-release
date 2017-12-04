@@ -2,38 +2,47 @@ category:
   priority: [work, cepcsoft, external]
   extra_config: [work_root]
   categories:
-    not_used:
-      setenv: false
+    not_used: {}
     system:
       pre_check: true
-      setenv: false
     external:
       install: true
+      set_env: true
+      required_config: [software_root, platform]
       root: '{software_root}/{platform}/external'
     cepcsoft:
       install: true
+      set_env: true
+      required_config: [software_root, platform]
       root: '{software_root}/{platform}/cepcsoft/{version}'
     work:
+      set_env: true
       auto_package: true
-#      root: '{work_root}'
+      required_config: [work_root]
+      root: '{work_root}'
 
 global_env:
   CEPCSOFT_VERSION: '{version}'
 
-path_mode:
-  multiple:
+path_usage:
+  install:
+    home: '{package}_root_dir'
+    bin: '{package}_bin_dir'
+    src: '{package}_src_dir'
+    lib: '{package}_lib_dir'
+    inc: '{package}_inc_dir'
+  multi_env:
     bin: PATH
     library: LD_LIBRARY_PATH
     man: MANPATH
     info: INFOPATH
     cmake: CMAKE_PREFIX_PATH
     marlin: MARLIN_DLL
-  single:
+  single_env:
     home: '{package}_HOME'
     src: '{package}_SOURCE'
     lib: '{package}_LIB'
     inc: '{package}_INCLUDE'
 
 handler:
-  default: default
   auto_compile: auto_cmake

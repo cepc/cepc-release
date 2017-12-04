@@ -1,13 +1,13 @@
 GCCSys:
-  post_check:
+  post_compile:
     handler: lib
 
 Make:
-  post_check:
+  post_compile:
     handler: lib
 
 MySQL:
-  post_check:
+  post_compile:
     handler: lib
 
 
@@ -21,14 +21,16 @@ GCC:
     param:
       file: gcc-{version}.tar.gz
       main: gcc-{version}
-  pre_check:
-    handler: gcc
+  pre_compile:
+    handler: command
+    param:
+      cmd: ['contrib', 'download_prerequisites']
   compile:
     handler: conf_make
     param:
       configure: ['--enable-languages=c,c++,fortran', --disable-multilib]
       install: install-strip
-  post_check:
+  post_compile:
     handler: lib
 
 CMake:
@@ -41,11 +43,11 @@ CMake:
     param:
       file: cmake-{version}.tar.gz
       main: cmake-{version}
-  pre_check:
+  pre_compile:
     handler: env
   compile:
     handler: conf_make
-  post_check:
+  post_compile:
     handler: lib
 
 
@@ -59,11 +61,11 @@ XercesC:
     param:
       file: xerces-c-{version}.tar.gz
       main: xerces-c-{version}
-  pre_check:
+  pre_compile:
     handler: env
   compile:
     handler: conf_make
-  post_check:
+  post_compile:
     handler: lib
 
 QT:
@@ -76,13 +78,13 @@ QT:
     param:
       file: qt-everywhere-opensource-src-{version}.tar.gz
       main: qt-everywhere-opensource-src-{version}
-  pre_check:
+  pre_compile:
     handler: env
   compile:
     handler: qt
     param:
       configure: [-prefix-install, -fast, -make, libs, -no-separate-debug-info, -no-xkb, -no-xinerama, -no-webkit, -opensource]
-  post_check:
+  post_compile:
     handler: lib
 
 CLHEP:
@@ -95,11 +97,11 @@ CLHEP:
     param:
       file: clhep-{version}.tgz
       main: '{version}/CLHEP'
-  pre_check:
+  pre_compile:
     handler: env
   compile:
     handler: cmake
-  post_check:
+  post_compile:
     handler: lib
 
 GSL:
@@ -112,11 +114,11 @@ GSL:
     param:
       file: gsl-{version}.tar.gz
       main: gsl-{version}
-  pre_check:
+  pre_compile:
     handler: env
   compile:
     handler: conf_make
-  post_check:
+  post_compile:
     handler: lib
 
 ROOT:
@@ -129,7 +131,7 @@ ROOT:
     param:
       file: root_v{version}.source.tar.gz
       main: root
-  pre_check:
+  pre_compile:
     handler: env
   compile:
     handler: conf_make
@@ -146,12 +148,12 @@ ROOT:
         - --enable-table
         - --enable-unuran
         - --enable-gsl-shared
-        - --with-gsl-incdir={gsl_inc_dir}
-        - --with-gsl-libdir={gsl_lib_dir}
+        - --with-gsl-incdir={GSL_inc_dir}
+        - --with-gsl-libdir={GSL_lib_dir}
         - --enable-python
       env_install:
-        ROOTSYS: '{root_root_dir}'
-  post_check:
+        ROOTSYS: '{ROOT_root_dir}'
+  post_compile:
     handler: lib
 
 Geant4:
@@ -164,7 +166,7 @@ Geant4:
     param:
       file: geant4.{version}.tar.gz
       main: geant4.{version}
-  pre_check:
+  pre_compile:
     handler: env
   compile:
     handler: cmake
@@ -177,12 +179,12 @@ Geant4:
         GEANT4_USE_QT: 'ON'
         GEANT4_USE_GDML: 'ON'
         XERCESC_ROOT_DIR: '{xercesc_root_dir}'
-  post_check:
+  post_compile:
     handler: lib
 
 
 ilcsoft_base: &ILCSOFT
-  pre_check:
+  pre_compile:
     handler: env
   compile: &ILCSOFT_COMPILE
     handler: cmake
@@ -192,7 +194,7 @@ ilcsoft_base: &ILCSOFT
         BUILD_32BIT_COMPATIBLE: 'OFF'
         INSTALL_DOC: 'OFF'
         CMAKE_BUILD_TYPE: RelWithDebInfo
-  post_check:
+  post_compile:
     handler: lib
 
 
@@ -201,7 +203,7 @@ ILCUTIL:
     handler: svn
     param:
       url: https://svnsrv.desy.de/public/ilctools/ilcutil/tags/v{version}
-  pre_check:
+  pre_compile:
     handler: env
   compile:
     <<: *ILCSOFT_COMPILE
@@ -212,7 +214,7 @@ LCIO:
     handler: svn
     param:
       url: svn://svn.freehep.org/lcio/tags/v{version}
-  pre_check:
+  pre_compile:
     handler: env
   compile:
     handler: cmake
@@ -257,7 +259,7 @@ Druid:
     handler: svn
     param:
       url: https://svnsrv.desy.de/public/Druid/tags/{version}
-  pre_check:
+  pre_compile:
     handler: env
   compile:
     handler: make
@@ -421,7 +423,7 @@ Clupatra:
     <<: *ILCSOFT_COMPILE
 
 LCFIVertex:
-  pre_check:
+  pre_compile:
     handler: command
     param:
       cmd: ['tar', '-xvf', 'boost.tgz']

@@ -1,17 +1,19 @@
 import os
 
+from cepcenv.util import safe_mkdir
+
 from cepcenv.loader import load_relative
 call_and_log = load_relative('util', 'call_and_log')
 
-def download(param):
-    log_file = os.path.join(param['pkg_config']['log_dir'], 'download_svn.log')
+def run(param):
+    version = param['pkg_info']['package']['version']
+    url = param['action_param']['url'].format(version=version)
+    dst_dir = param['pkg_info']['dir']['root']
 
-    url = param['action_param']['url'].format(**param['pkg_config'])
-    dst_dir = param['pkg_config']['package_root']
-    version = param['pkg_config']['version']
+    safe_mkdir(dst_dir)
 
     cmd = ['svn', 'export', '--force', url, version]
-    with open(log_file, 'w') as f:
+    with open(param['log_file'], 'w') as f:
         ret = call_and_log(cmd, log=f, cwd=dst_dir)
 
     return ret==0

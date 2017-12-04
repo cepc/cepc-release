@@ -2,18 +2,20 @@ import os
 import pprint
 
 from cepcenv.util import ensure_list
+from cepcenv.util import safe_mkdir
 
 from cepcenv.loader import load_relative
 auto_make_jobs = load_relative('util', 'auto_make_jobs')
 call_and_log = load_relative('util', 'call_and_log')
 
 
-def compile(param):
-    log_file = os.path.join(param['pkg_config']['log_dir'], 'compile_cmake.log')
+def run(param):
+    source_dir = param['pkg_info']['dir']['source']
+    build_dir = param['pkg_info']['dir']['build']
+    install_dir = param['pkg_info']['dir']['install']
 
-    source_dir = param['pkg_config']['source_dir']
-    build_dir = param['pkg_config']['build_dir']
-    install_dir = param['pkg_config']['install_dir']
+    safe_mkdir(build_dir)
+    safe_mkdir(install_dir)
 
 
     cmake_args = param['action_param'].get('args', [])
@@ -42,7 +44,7 @@ def compile(param):
     make_opt = auto_make_jobs(make_opt)
 
 
-    with open(log_file, 'w') as f:
+    with open(param['log_file'], 'w') as f:
         cmd = ['cmake', source_dir] + cmake_args
         ret = call_and_log(cmd, log=f, cwd=build_dir, env=env)
         if ret != 0:
