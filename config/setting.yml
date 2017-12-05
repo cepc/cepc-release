@@ -46,3 +46,5 @@ path_usage:
 
 handler:
   auto_compile: auto_cmake
+
+pre_transform: [basic_package]

@@ -12,7 +12,7 @@ def run(param):
 
     safe_mkdir(dst_dir)
 
-    cmd = ['curl', '-f', '-L', '-s', '-S', '-O', url]
+    cmd = ['curl', '-v', '-f', '-L', '-s', '-S', '-R', '-O', url]
     with open(param['log_file'], 'w') as f:
         ret = call_and_log(cmd, log=f, cwd=dst_dir)
 

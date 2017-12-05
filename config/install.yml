@@ -24,7 +24,7 @@ GCC:
   pre_compile:
     handler: command
     param:
-      cmd: ['contrib', 'download_prerequisites']
+      cmd: ['contrib/download_prerequisites']
   compile:
     handler: conf_make
     param:

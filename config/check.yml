@@ -1,0 +1,34 @@
+Wget:
+  check:
+    executable:
+      - wget
+  package_manager:
+    yum: wget
+
+Subversion:
+  check:
+    executable:
+      - svn
+  package_manager:
+    yum: subversion
+
+GCCSys:
+  check:
+    executable:
+      - gcc
+      - g++
+      - gfortran
+  package_manager:
+    yum: [gcc, gcc-c++, gcc-gfortran]
+
+Make:
+  category: system
+
+MySQL:
+  category: system
+
+GLUT:
+  category: system
+
+OpenGL:
+  category: system

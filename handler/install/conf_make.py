@@ -29,13 +29,13 @@ def run(param):
     env = param.get('env')
     env_configure = env.copy()
     for k, v in param['action_param'].get('env_configure', {}).items():
-        env_configure[k] = v.format(**param['pkg_path'])
+        env_configure[k] = v.format(**param['pkg_dir_list'])
     env_make = env.copy()
     for k, v in param['action_param'].get('env_make', {}).items():
-        env_make[k] = v.format(**param['pkg_path'])
+        env_make[k] = v.format(**param['pkg_dir_list'])
     env_install = env.copy()
     for k, v in param['action_param'].get('env_install', {}).items():
-        env_install[k] = v.format(**param['pkg_path'])
+        env_install[k] = v.format(**param['pkg_dir_list'])
 
     make_opt = param['config'].get('make_opt', [])
     make_opt = ensure_list(make_opt)

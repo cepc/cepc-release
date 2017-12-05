@@ -1,3 +1,9 @@
+Wget:
+  category: system
+
+Subversion:
+  category: system
+
 GCCSys:
   category: system
 
@@ -15,7 +21,7 @@ OpenGL:
 
 
 GCC:
-  category: external
+  category: not_used
   path: Service
   version: 4.9.4
 

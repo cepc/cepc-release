@@ -20,14 +20,14 @@ def run(param):
 
     cmake_args = param['action_param'].get('args', [])
     cmake_args = ensure_list(cmake_args)
-    cmake_args = [p.format(**param['pkg_path']) for p in cmake_args]
+    cmake_args = [p.format(**param['pkg_dir_list']) for p in cmake_args]
 
     if not param['action_param'].get('ignore_install_prefix', False):
         cmake_args.insert(0, '-DCMAKE_INSTALL_PREFIX='+install_dir)
 
     envcmake = param['action_param'].get('envcmake', {})
     for k, v in envcmake.items():
-        full_value = v.format(**param['pkg_path'])
+        full_value = v.format(**param['pkg_dir_list'])
         full_arg = '-D{0}={1}'.format(k, full_value)
         cmake_args.append(full_arg)
 
