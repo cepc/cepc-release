@@ -57,6 +57,13 @@ MySQL:
   package_manager:
     yum: mysql-devel
 
+SQLite:
+  check:
+    include:
+      - [sqlite3.h]
+  package_manager:
+    yum: sqlite-devel
+
 OpenSSL:
   check:
     include:
