@@ -56,8 +56,8 @@ QT:
   path:
     <<: *COMMON_PATH_DEFAULT
     bin: '{install}/bin'
-    lib: '{install}/lib64'
-    library: '{install}/lib64'
+    lib: '{install}/lib'
+    library: '{install}/lib'
     inc: '{install}/include'
 
 CLHEP:
