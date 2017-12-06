@@ -178,7 +178,7 @@ Geant4:
         GEANT4_USE_OPENGL_X11: 'ON'
         GEANT4_USE_QT: 'ON'
         GEANT4_USE_GDML: 'ON'
-        XERCESC_ROOT_DIR: '{xercesc_root_dir}'
+        XERCESC_ROOT_DIR: '{XercesC_root_dir}'
   post_compile:
     handler: lib
 

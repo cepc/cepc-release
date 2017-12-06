@@ -1,34 +1,158 @@
+Git:
+  check:
+    executable:
+      - [git]
+  package_manager:
+    yum: git
+
 Wget:
   check:
     executable:
-      - wget
+      - [wget]
   package_manager:
     yum: wget
 
 Subversion:
   check:
     executable:
-      - svn
+      - [svn]
   package_manager:
     yum: subversion
 
 GCCSys:
   check:
     executable:
-      - gcc
-      - g++
-      - gfortran
+      - [gcc]
+      - [g++]
+      - [gfortran]
   package_manager:
     yum: [gcc, gcc-c++, gcc-gfortran]
 
 Make:
-  category: system
+  check:
+    executable:
+      - [make]
+  package_manager:
+    yum: make
+
+Java:
+  check:
+    executable:
+      - [javac]
+  package_manager:
+    yum: java-1.8.0-openjdk-devel
+
+
+Python:
+  check:
+    include:
+      - [python2.6/Python.h, python2.7/Python.h]
+  package_manager:
+    yum: python-devel
 
 MySQL:
-  category: system
+  check:
+    include:
+      - [mysql/mysql.h, mysql.h]
+  package_manager:
+    yum: mysql-devel
 
-GLUT:
-  category: system
+OpenSSL:
+  check:
+    include:
+      - [openssl/ssl.h]
+  package_manager:
+    yum: openssl-devel
+
+#PCRE:
+#  check:
+#    include:
+#      - [pcre.h]
+#  package_manager:
+#    yum: pcre-devel
+
+Libxml2:
+  check:
+    include:
+      - [libxml2/libxml/tree.h, libxml/tree.h]
+  package_manager:
+    yum: libxml2-devel
+
+#FreeType:
+#  check:
+#    include:
+#      - [freetype2/freetype/freetype.h, freetype/freetype.h]
+#  package_manager:
+#    yum: freetype-devel
+
+FFTW:
+  check:
+    include:
+      - [fftw3.h]
+  package_manager:
+    yum: fftw-devel
+
+
+X11:
+  check:
+    include:
+      - [X11/Xlib.h]
+  package_manager:
+    yum: libX11-devel
+
+Xpm:
+  check:
+    include:
+      - [X11/xpm.h]
+  package_manager:
+    yum: libXpm-devel
+
+Xt:
+  check:
+    include:
+      - [X11/Intrinsic.h]
+  package_manager:
+    yum: libXt-devel
+
+Xft:
+  check:
+    include:
+      - [X11/Xft/Xft.h]
+  package_manager:
+    yum: libXft-devel
+
+Xext:
+  check:
+    include:
+      - [X11/extensions/shape.h]
+  package_manager:
+    yum: libXext-devel
+
+Xmu:
+  check:
+    include:
+      - [X11/Xmu/Xmu.h]
+  package_manager:
+    yum: libXmu-devel
+
+Xauth:
+  check:
+    executable:
+      - [xauth]
+  package_manager:
+    yum: xorg-x11-xauth
 
 OpenGL:
-  category: system
+  check:
+    include:
+      - [GL/gl.h]
+      - [GL/glu.h]
+  package_manager:
+    yum: [mesa-libGL-devel, mesa-libGLU-devel]
+
+GLUT:
+  check:
+    include:
+      - [GL/glut.h]
+  package_manager:
+    yum: freeglut-devel

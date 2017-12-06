@@ -76,7 +76,7 @@ GSL:
   location:
     <<: *COMMON_LOCATION_DEFAULT
   path:
-    <<: *COMMON_PATH_DEFAULT
+    <<: *CMAKE_PATH_DEFAULT
     bin: '{install}/bin'
     lib: '{install}/lib'
     library: '{install}/lib'
@@ -85,7 +85,7 @@ GSL:
     info: '{install}/share/info'
 
 ROOT:
-  dep: [GCC]
+  dep: [GCC, CMake, GSL]
   location:
     <<: *COMMON_LOCATION_DEFAULT
   path:

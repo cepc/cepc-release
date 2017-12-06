@@ -8,6 +8,8 @@ def run(param):
     cmd = param['action_param']['cmd']
 
     with open(param['log_file'], 'w') as f:
+        f.write(str(param['pkg_info']['dir']))
+        f.flush()
         ret = call_and_log(cmd, log=f, cwd=source_dir)
 
     return ret==0
