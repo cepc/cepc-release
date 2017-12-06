@@ -150,6 +150,9 @@ ROOT:
         - --enable-gsl-shared
         - --with-gsl-incdir={GSL_inc_dir}
         - --with-gsl-libdir={GSL_lib_dir}
+        - --enable-qt
+        - --with-qt-incdir={QT_inc_dir}
+        - --with-qt-libdir={QT_lib_dir}
         - --enable-python
       env_install:
         ROOTSYS: '{ROOT_root_dir}'

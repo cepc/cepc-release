@@ -3,6 +3,7 @@ import pprint
 
 from cepcenv.util import ensure_list
 from cepcenv.util import safe_mkdir
+from cepcenv.util import safe_rmdir
 
 from cepcenv.loader import load_relative
 auto_make_jobs = load_relative('util', 'auto_make_jobs')
@@ -14,7 +15,9 @@ def run(param):
     build_dir = param['pkg_info']['dir']['build']
     install_dir = param['pkg_info']['dir']['install']
 
+    safe_rmdir(build_dir)
     safe_mkdir(build_dir)
+    safe_rmdir(install_dir)
     safe_mkdir(install_dir)
 
 

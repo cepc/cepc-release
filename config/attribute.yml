@@ -85,7 +85,7 @@ GSL:
     info: '{install}/share/info'
 
 ROOT:
-  dep: [GCC, CMake, GSL]
+  dep: [GCC, CMake, GSL, QT]
   location:
     <<: *COMMON_LOCATION_DEFAULT
   path:
