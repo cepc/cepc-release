@@ -1,9 +1,9 @@
-Git:
+Patch:
   check:
     executable:
-      - [git]
+      - [patch]
   package_manager:
-    yum: git
+    yum: patch
 
 Wget:
   check:
@@ -11,6 +11,13 @@ Wget:
       - [wget]
   package_manager:
     yum: wget
+
+Git:
+  check:
+    executable:
+      - [git]
+  package_manager:
+    yum: git
 
 Subversion:
   check:
