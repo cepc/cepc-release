@@ -47,4 +47,4 @@ path_usage:
 handler:
   auto_compile: auto_cmake
 
-pre_transform: [basic_package]
+pre_transform: [basic_package, gcc_version]
