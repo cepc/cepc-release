@@ -1,0 +1,38 @@
+diff -Nur fastjet-2.4.2/include/fastjet/internal/ClusterSequence_N2.icc fastjet-2.4.2_patched/include/fastjet/internal/ClusterSequence_N2.icc
+--- fastjet-2.4.2/include/fastjet/internal/ClusterSequence_N2.icc	2009-11-19 17:55:36.000000000 +0800
++++ fastjet-2.4.2_patched/include/fastjet/internal/ClusterSequence_N2.icc	2017-12-07 20:18:19.970019070 +0800
+@@ -106,7 +106,7 @@
+       // the larger of them == newtail then that ends up being jetA and 
+       // the new jet that is added as jetB is inserted in a position that
+       // has a future!
+-      if (jetA < jetB) {swap(jetA,jetB);}
++      if (jetA < jetB) {std::swap(jetA,jetB);}
+ 
+       int nn; // new jet index
+       _do_ij_recombination_step(jetA->_jets_index, jetB->_jets_index, diJ_min, nn);
+diff -Nur fastjet-2.4.2/include/fastjet/NNH.hh fastjet-2.4.2_patched/include/fastjet/NNH.hh
+--- fastjet-2.4.2/include/fastjet/NNH.hh	2009-11-19 18:12:27.000000000 +0800
++++ fastjet-2.4.2_patched/include/fastjet/NNH.hh	2017-12-07 20:18:19.972019176 +0800
+@@ -190,7 +190,7 @@
+   // initialise the basic jet info 
+   for (int i = 0; i< n; i++) {
+     //jetA->init(jets[i], i);
+-    init_jet(jetA, jets[i], i);
++    this->init_jet(jetA, jets[i], i);
+     where_is[i] = jetA;
+     jetA++; // move on to next entry of briefjets
+   }
+@@ -263,11 +263,11 @@
+   // the larger of them == newtail then that ends up being jetA and 
+   // the new jet that is added as jetB is inserted in a position that
+   // has a future!
+-  if (jetA < jetB) swap(jetA,jetB);
++  if (jetA < jetB) std::swap(jetA,jetB);
+ 
+   // initialise jetB based on the new jet
+   //jetB->init(jet, index);
+-  init_jet(jetB, jet, index);
++  this->init_jet(jetB, jet, index);
+   // and record its position (making sure we have the space)
+   if (index >= int(where_is.size())) where_is.resize(2*index);
+   where_is[jetB->index()] = jetB;

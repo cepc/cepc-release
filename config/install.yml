@@ -301,6 +301,10 @@ FastJet:
     param:
       file: fastjet-{version}.tar.gz
       main: fastjet-{version}
+  pre_compile:
+    handler: patch
+    param:
+      file: fastjet-2.4.2.patch
   compile:
     handler: conf_make
     param:
