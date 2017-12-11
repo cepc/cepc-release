@@ -47,7 +47,7 @@ GSL:
 
 ROOT:
   category: external
-  version: 5.34.10
+  version: 5.34.18
 
 Geant4:
   category: external
@@ -117,7 +117,7 @@ KalTest:
 KalDet:
   category: cepcsoft
   path: Reconstruction/Tracking
-  version: 01-13
+  version: 01-13-01
 
 GBL:
   category: cepcsoft

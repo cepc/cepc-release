@@ -1,0 +1,28 @@
+diff -Nur 01-04/src/Criteria/Crit4_3DAngleChange.cc 01-04_patched/src/Criteria/Crit4_3DAngleChange.cc
+--- 01-04/src/Criteria/Crit4_3DAngleChange.cc	2012-06-19 00:34:49.310933000 +0800
++++ 01-04_patched/src/Criteria/Crit4_3DAngleChange.cc	2017-12-11 11:33:49.021000035 +0800
+@@ -60,8 +60,8 @@
+   
+       
+       
+-      double angleXY1 = outerVec.Angle( middleVec.Phi() ); 
+-      double angleXY2 = middleVec.Angle( innerVec.Phi() );
++      double angleXY1 = outerVec.Angle( middleVec ); 
++      double angleXY2 = middleVec.Angle( innerVec );
+       
+       angleXY1 -= 2*M_PI*floor( angleXY1 /2. /M_PI );    //to the range from 0 to 2pi 
+       if (angleXY1 > M_PI) angleXY1 -= 2*M_PI;           //to the range from -pi to pi
+diff -Nur 01-04/src/Criteria/Crit4_3DAngleChangeNormed.cc 01-04_patched/src/Criteria/Crit4_3DAngleChangeNormed.cc
+--- 01-04/src/Criteria/Crit4_3DAngleChangeNormed.cc	2012-06-19 00:34:49.310933000 +0800
++++ 01-04_patched/src/Criteria/Crit4_3DAngleChangeNormed.cc	2017-12-11 11:33:49.017000035 +0800
+@@ -61,8 +61,8 @@
+       
+       
+       
+-      double angleXY1 = outerVec.Angle( middleVec.Phi() ); 
+-      double angleXY2 = middleVec.Angle( innerVec.Phi() );
++      double angleXY1 = outerVec.Angle( middleVec ); 
++      double angleXY2 = middleVec.Angle( innerVec );
+       
+       angleXY1 -= 2*M_PI*floor( angleXY1 /2. /M_PI );    //to the range from 0 to 2pi 
+       if (angleXY1 > M_PI) angleXY1 -= 2*M_PI;           //to the range from -pi to pi

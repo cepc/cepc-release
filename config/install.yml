@@ -459,6 +459,10 @@ KiTrack:
     handler: svn
     param:
       url: https://svnsrv.desy.de/public/marlinreco/KiTrack/tags/v{version}
+  pre_compile:
+    handler: patch
+    param:
+      file: KiTrack-01-04.patch
   compile:
     <<: *ILCSOFT_COMPILE
 
