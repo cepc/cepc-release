@@ -22,7 +22,7 @@ GCC:
   location:
     <<: *COMMON_LOCATION_DEFAULT
   path:
-    <<: *COMMON_PATH_DEFAULT
+    home: '{install}'
     bin: '{install}/bin'
     library: '{install}/lib64'
     man: '{install}/share/man'
@@ -32,7 +32,7 @@ CMake:
   location:
     <<: *COMMON_LOCATION_DEFAULT
   path:
-    <<: *COMMON_PATH_DEFAULT
+    home: '{install}'
     bin: '{install}/bin'
     library: '{install}/lib'
     man: '{install}/man'
@@ -54,7 +54,7 @@ QT:
   location:
     <<: *COMMON_LOCATION_DEFAULT
   path:
-    <<: *COMMON_PATH_DEFAULT
+    home: '{install}'
     bin: '{install}/bin'
     lib: '{install}/lib'
     library: '{install}/lib'
