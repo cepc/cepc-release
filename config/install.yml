@@ -32,6 +32,10 @@ GCC:
       install: install-strip
   post_compile:
     handler: lib
+  clean: &CLEAN_WITH_SOURCE
+    handler: clean
+    param:
+      dir: [build, source, download, log]
 
 CMake:
   download:
@@ -49,6 +53,8 @@ CMake:
     handler: conf_make
   post_compile:
     handler: lib
+  clean:
+    <<: *CLEAN_WITH_SOURCE
 
 
 XercesC:
@@ -67,6 +73,10 @@ XercesC:
     handler: conf_make
   post_compile:
     handler: lib
+  clean: &CLEAN_COMMON
+    handler: clean
+    param:
+      dir: [build, download, log]
 
 QT:
   download:
@@ -86,6 +96,8 @@ QT:
       configure: [-prefix-install, -fast, -make, libs, -no-separate-debug-info, -no-xkb, -no-xinerama, -no-webkit, -opensource]
   post_compile:
     handler: lib
+  clean:
+    <<: *CLEAN_WITH_SOURCE
 
 CLHEP:
   download:
@@ -103,6 +115,8 @@ CLHEP:
     handler: cmake
   post_compile:
     handler: lib
+  clean:
+    <<: *CLEAN_COMMON
 
 GSL:
   download:
@@ -120,6 +134,8 @@ GSL:
     handler: conf_make
   post_compile:
     handler: lib
+  clean:
+    <<: *CLEAN_COMMON
 
 ROOT:
   download:
@@ -158,6 +174,8 @@ ROOT:
         ROOTSYS: '{ROOT_root_dir}'
   post_compile:
     handler: lib
+  clean:
+    <<: *CLEAN_COMMON
 
 Geant4:
   download:
@@ -184,6 +202,8 @@ Geant4:
         XERCESC_ROOT_DIR: '{XercesC_root_dir}'
   post_compile:
     handler: lib
+  clean:
+    <<: *CLEAN_COMMON
 
 
 ilcsoft_base: &ILCSOFT
@@ -210,6 +230,8 @@ ILCUTIL:
     handler: env
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 
 LCIO:
@@ -227,6 +249,8 @@ LCIO:
         <<: *ILCSOFT_ENVCMAKE
         BUILD_ROOTDICT: 'ON'
         INSTALL_JAR: 'OFF'
+  clean:
+    <<: *CLEAN_COMMON
 
 GEAR:
   download:
@@ -240,6 +264,8 @@ GEAR:
       envcmake:
         <<: *ILCSOFT_ENVCMAKE
         GEAR_TGEO: 'ON'
+  clean:
+    <<: *CLEAN_COMMON
 
 Mokka:
   download:
@@ -248,6 +274,8 @@ Mokka:
       url: http://llrforge.in2p3.fr/svn/Mokka/tags/mokka-{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 CondDBMySQL:
   download:
@@ -256,6 +284,8 @@ CondDBMySQL:
       url: https://svnsrv.desy.de/public/calice/CondDBMySQL/tags/CondDBMySQL_ILC-{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 Druid:
   download:
@@ -268,6 +298,8 @@ Druid:
     handler: make
     param:
       make_root: src
+  clean:
+    <<: *CLEAN_COMMON
 
 CED:
   download:
@@ -281,6 +313,8 @@ CED:
       envcmake:
         <<: *ILCSOFT_ENVCMAKE
         CED_SERVER: 'ON'
+  clean:
+    <<: *CLEAN_COMMON
 
 CEDViewer:
   download:
@@ -289,6 +323,8 @@ CEDViewer:
       url: https://svnsrv.desy.de/public/marlinreco/CEDViewer/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 FastJet:
   download:
@@ -309,6 +345,8 @@ FastJet:
     handler: conf_make
     param:
       configure: --enable-shared
+  clean:
+    <<: *CLEAN_COMMON
 
 FastJetClustering:
   download:
@@ -317,6 +355,8 @@ FastJetClustering:
       url: https://svnsrv.desy.de/public/marlinreco/FastJetClustering/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 MarlinFastJet:
   download:
@@ -325,6 +365,8 @@ MarlinFastJet:
       url: https://svnsrv.desy.de/public/marlinreco/MarlinFastJet/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 KalTest:
   download:
@@ -333,6 +375,8 @@ KalTest:
       url: https://svnsrv.desy.de/public/kaltest/KalTest/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 KalDet:
   download:
@@ -341,6 +385,8 @@ KalDet:
       url: https://svnsrv.desy.de/public/kaltest/KalDet/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 GBL:
   download:
@@ -349,6 +395,8 @@ GBL:
       url: https://svnsrv.desy.de/public/GeneralBrokenLines/tags/V{version}/cpp
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 LCCD:
   download:
@@ -362,6 +410,8 @@ LCCD:
       envcmake:
         <<: *ILCSOFT_ENVCMAKE
         LCCD_CONDDBMYSQL: 'OFF'
+  clean:
+    <<: *CLEAN_COMMON
 
 RAIDA:
   download:
@@ -370,6 +420,8 @@ RAIDA:
       url: https://svnsrv.desy.de/public/ilctools/RAIDA/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 MarlinUtil:
   download:
@@ -378,6 +430,8 @@ MarlinUtil:
       url: https://svnsrv.desy.de/public/marlinreco/MarlinUtil/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 Marlin:
   download:
@@ -391,6 +445,8 @@ Marlin:
       envcmake:
         <<: *ILCSOFT_ENVCMAKE
         MARLIN_GUI: 'OFF'
+  clean:
+    <<: *CLEAN_COMMON
 
 MarlinReco:
   download:
@@ -404,6 +460,8 @@ MarlinReco:
       envcmake:
         <<: *ILCSOFT_ENVCMAKE
         MARLINRECO_FORTRAN: 'OFF'
+  clean:
+    <<: *CLEAN_COMMON
 
 MarlinTrk:
   download:
@@ -412,6 +470,8 @@ MarlinTrk:
       url: https://svnsrv.desy.de/public/marlinreco/MarlinTrk/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 MarlinTrkProcessors:
   download:
@@ -420,6 +480,8 @@ MarlinTrkProcessors:
       url: https://svnsrv.desy.de/public/marlinreco/MarlinTrkProcessors/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 Clupatra:
   download:
@@ -428,6 +490,8 @@ Clupatra:
       url: https://svnsrv.desy.de/public/marlinreco/Clupatra/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 LCFIVertex:
   pre_compile:
@@ -445,6 +509,8 @@ LCFIVertex:
       envcmake:
         <<: *ILCSOFT_ENVCMAKE
         AIDA: 'OFF'
+  clean:
+    <<: *CLEAN_COMMON
 
 LCFIPlus:
   download:
@@ -453,6 +519,8 @@ LCFIPlus:
       url: https://svnsrv.desy.de/public/marlinreco/LCFIPlus/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 KiTrack:
   download:
@@ -465,6 +533,8 @@ KiTrack:
       file: KiTrack-01-04.patch
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 KiTrackMarlin:
   download:
@@ -473,6 +543,8 @@ KiTrackMarlin:
       url: https://svnsrv.desy.de/public/marlinreco/KiTrackMarlin/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 ForwardTracking:
   download:
@@ -481,6 +553,8 @@ ForwardTracking:
       url: https://svnsrv.desy.de/public/marlinreco/ForwardTracking/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 MarlinKinfit:
   download:
@@ -489,6 +563,8 @@ MarlinKinfit:
       url: https://svnsrv.desy.de/public/marlinreco/MarlinKinfit/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 PandoraPFANew:
   download:
@@ -502,6 +578,8 @@ PandoraPFANew:
       envcmake:
         <<: *ILCSOFT_ENVCMAKE
         PANDORA_MONITORING: 'OFF'
+  clean:
+    <<: *CLEAN_COMMON
 
 MarlinPandora:
   download:
@@ -515,6 +593,8 @@ MarlinPandora:
       envcmake:
         <<: *ILCSOFT_ENVCMAKE
         PANDORA_MONITORING: 'OFF'
+  clean:
+    <<: *CLEAN_COMMON
 
 PandoraAnalysis:
   download:
@@ -523,6 +603,8 @@ PandoraAnalysis:
       url: https://svnsrv.desy.de/public/PandoraPFANew/PandoraAnalysis/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 Overlay:
   download:
@@ -531,6 +613,8 @@ Overlay:
       url: https://svnsrv.desy.de/public/marlin/Overlay/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 PathFinder:
   download:
@@ -539,6 +623,8 @@ PathFinder:
       url: https://svnsrv.desy.de/public/pathfinder/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 MarlinTPC:
   download:
@@ -547,6 +633,8 @@ MarlinTPC:
       url: https://svnsrv.desy.de/public/marlintpc/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 LCTuple:
   download:
@@ -555,6 +643,8 @@ LCTuple:
       url: https://svnsrv.desy.de/public/marlinreco/LCTuple/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 BBQ:
   download:
@@ -563,6 +653,8 @@ BBQ:
       url: https://svnsrv.desy.de/public/bbq/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 Garlic:
   download:
@@ -571,6 +663,8 @@ Garlic:
       url: https://svnsrv.desy.de/public/Garlic/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 HepPDT:
   download:
@@ -584,6 +678,8 @@ HepPDT:
       main: HepPDT-{version}
   compile:
     handler: conf_make
+  clean:
+    <<: *CLEAN_COMMON
 
 GDML:
   download:
@@ -592,6 +688,8 @@ GDML:
       url: svn://svn.freehep.org/lcdet/projects/gdml/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 LCDD:
   download:
@@ -600,6 +698,8 @@ LCDD:
       url: svn://svn.freehep.org/lcdet/projects/lcdd/tags/v{version}
   compile:
     <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
 
 SLIC:
   download:
@@ -611,6 +711,10 @@ SLIC:
     param:
       <<: *ILCSOFT_CMAKE_PARAM
       do_make_install: false
+  clean:
+    handler: clean
+    param:
+      dir: [download, log]
 
 DD4hep:
   download:
@@ -626,3 +730,5 @@ DD4hep:
         DD4HEP_WITH_GEANT4: '0'
         DD4HEP_USE_XERCESC: '0'
         DD4HEP_USE_PYROOT: '0'
+  clean:
+    <<: *CLEAN_COMMON
