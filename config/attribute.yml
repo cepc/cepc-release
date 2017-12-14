@@ -394,6 +394,16 @@ MarlinKinfit:
     lib: '{install}/lib'
     inc: '{install}/include'
 
+Arbor:
+  dep: [GCC, CMake, ROOT, ILCUTIL, Marlin, MarlinUtil]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    lib: '{install}/lib'
+    inc: '{install}/include'
+    marlin: '{install}/lib/libRanger.so'
+
 PandoraPFANew:
   dep: [GCC, CMake, ROOT, ILCUTIL]
   location:
