@@ -269,9 +269,17 @@ GEAR:
 
 Mokka:
   download:
-    handler: svn
+    #handler: svn
+    #param:
+    #  url: http://llrforge.in2p3.fr/svn/Mokka/tags/mokka-{version}
+    handler: http
     param:
-      url: http://llrforge.in2p3.fr/svn/Mokka/tags/mokka-{version}
+      url: http://cepcsoft.ihep.ac.cn/package/cepcsoft/Mokka/{version}/mokka-{version}.tar.gz
+  extract:
+    handler: tar
+    param:
+      file: mokka-{version}.tar.gz
+      main: mokka-{version}
   compile:
     <<: *ILCSOFT_COMPILE
   clean:
@@ -561,6 +569,21 @@ MarlinKinfit:
     handler: svn
     param:
       url: https://svnsrv.desy.de/public/marlinreco/MarlinKinfit/tags/v{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
+
+Arbor:
+  download:
+    handler: http
+    param:
+      url: http://cepcsoft.ihep.ac.cn/package/cepcsoft/Arbor/{version}/{version}.tar.gz
+  extract:
+    handler: tar
+    param:
+      file: '{version}.tar.gz'
+      main: '{version}'
   compile:
     <<: *ILCSOFT_COMPILE
   clean:

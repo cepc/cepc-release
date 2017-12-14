@@ -72,7 +72,7 @@ GEAR:
 Mokka:
   category: cepcsoft
   path: Simulation
-  version: 08-03
+  version: 08-03_150612
 
 CondDBMySQL:
   category: not_used
@@ -181,7 +181,7 @@ KiTrack:
 
 KiTrackMarlin:
   category: cepcsoft
-  path: Reconstruction
+  path: Reconstruction/Tracking
   version: 01-04
 
 ForwardTracking:
@@ -193,6 +193,11 @@ MarlinKinfit:
   category: cepcsoft
   path: Analysis
   version: 00-01-02
+
+Arbor:
+  category: cepcsoft
+  path: Reconstruction/PFA
+  version: 151125_v3
 
 PandoraPFANew:
   category: cepcsoft
