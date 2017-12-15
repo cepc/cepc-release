@@ -82,7 +82,7 @@ CondDBMySQL:
 Druid:
   category: cepcsoft
   path: EventDisplay
-  version: '2.2'
+  version: '2.4'
 
 CED:
   category: cepcsoft

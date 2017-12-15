@@ -269,17 +269,14 @@ GEAR:
 
 Mokka:
   download:
-    #handler: svn
-    #param:
-    #  url: http://llrforge.in2p3.fr/svn/Mokka/tags/mokka-{version}
     handler: http
     param:
-      url: http://cepcsoft.ihep.ac.cn/package/cepcsoft/Mokka/{version}/mokka-{version}.tar.gz
+      url: http://cepcsoft.ihep.ac.cn/package/cepcsoft/Mokka/{version}/Mokka-{version}.tar.gz
   extract:
     handler: tar
     param:
-      file: mokka-{version}.tar.gz
-      main: mokka-{version}
+      file: Mokka-{version}.tar.gz
+      main: Mokka-{version}
   compile:
     <<: *ILCSOFT_COMPILE
   clean:
@@ -297,9 +294,14 @@ CondDBMySQL:
 
 Druid:
   download:
-    handler: svn
+    handler: http
     param:
-      url: https://svnsrv.desy.de/public/Druid/tags/{version}
+      url: http://cepcsoft.ihep.ac.cn/package/cepcsoft/Druid/{version}/Druid-{version}.tar.gz
+  extract:
+    handler: tar
+    param:
+      file: Druid-{version}.tar.gz
+      main: Druid-{version}
   pre_compile:
     handler: env
   compile:
@@ -578,12 +580,12 @@ Arbor:
   download:
     handler: http
     param:
-      url: http://cepcsoft.ihep.ac.cn/package/cepcsoft/Arbor/{version}/{version}.tar.gz
+      url: http://cepcsoft.ihep.ac.cn/package/cepcsoft/Arbor/{version}/Arbor-{version}.tar.gz
   extract:
     handler: tar
     param:
-      file: '{version}.tar.gz'
-      main: '{version}'
+      file: 'Arbor-{version}.tar.gz'
+      main: 'Arbor-{version}'
   compile:
     <<: *ILCSOFT_COMPILE
   clean:
