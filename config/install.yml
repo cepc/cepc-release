@@ -27,6 +27,7 @@ GCC:
       cmd:
         - ['contrib/download_prerequisites']
         - ['sed', '-i', 's/M4=m4-not-needed/M4=m4/', 'gmp/configure.in']
+        - ['sed', '-i', 's/M4=m4-not-needed/M4=m4/', 'gmp/configure']
   compile:
     handler: conf_make
     param:
