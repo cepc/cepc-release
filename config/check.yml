@@ -78,6 +78,13 @@ OpenSSL:
   package_manager:
     yum: openssl-devel
 
+#ICU:
+#  check:
+#    include:
+#      - [unicode/utypes.h]
+#  package_manager:
+#    yum: libicu-devel
+
 #PCRE:
 #  check:
 #    include:
