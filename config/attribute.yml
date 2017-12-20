@@ -47,6 +47,7 @@ XercesC:
     bin: '{install}/bin'
     lib: '{install}/lib'
     library: '{install}/lib'
+    pkgconfig: '{install}/lib/pkgconfig'
     inc: '{install}/include'
 
 QT:
@@ -58,6 +59,7 @@ QT:
     bin: '{install}/bin'
     lib: '{install}/lib'
     library: '{install}/lib'
+    pkgconfig: '{install}/lib/pkgconfig'
     inc: '{install}/include'
 
 CLHEP:
@@ -69,6 +71,7 @@ CLHEP:
     bin: '{install}/bin'
     lib: '{install}/lib'
     library: '{install}/lib'
+    pkgconfig: '{install}/lib/pkgconfig'
     inc: '{install}/include'
 
 GSL:
@@ -80,6 +83,7 @@ GSL:
     bin: '{install}/bin'
     lib: '{install}/lib'
     library: '{install}/lib'
+    pkgconfig: '{install}/lib/pkgconfig'
     inc: '{install}/include'
     man: '{install}/share/man'
     info: '{install}/share/info'

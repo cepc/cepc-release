@@ -21,7 +21,7 @@ OpenGL:
 
 
 GCC:
-  category: not_used
+  category: external
   version: 4.9.4
 
 CMake:
