@@ -24,7 +24,7 @@ GCC:
   path:
     home: '{install}'
     bin: '{install}/bin'
-    library: '{install}/lib64'
+    lib: '{install}/lib64'
     man: '{install}/share/man'
 
 CMake:
@@ -34,7 +34,7 @@ CMake:
   path:
     home: '{install}'
     bin: '{install}/bin'
-    library: '{install}/lib'
+    lib: '{install}/lib'
     man: '{install}/man'
 
 
@@ -46,7 +46,6 @@ XercesC:
     <<: *CMAKE_PATH_DEFAULT
     bin: '{install}/bin'
     lib: '{install}/lib'
-    library: '{install}/lib'
     pkgconfig: '{install}/lib/pkgconfig'
     inc: '{install}/include'
 
@@ -58,7 +57,6 @@ QT:
     home: '{install}'
     bin: '{install}/bin'
     lib: '{install}/lib'
-    library: '{install}/lib'
     pkgconfig: '{install}/lib/pkgconfig'
     inc: '{install}/include'
 
@@ -70,7 +68,6 @@ CLHEP:
     <<: *CMAKE_PATH_DEFAULT
     bin: '{install}/bin'
     lib: '{install}/lib'
-    library: '{install}/lib'
     pkgconfig: '{install}/lib/pkgconfig'
     inc: '{install}/include'
 
@@ -82,7 +79,6 @@ GSL:
     <<: *CMAKE_PATH_DEFAULT
     bin: '{install}/bin'
     lib: '{install}/lib'
-    library: '{install}/lib'
     pkgconfig: '{install}/lib/pkgconfig'
     inc: '{install}/include'
     man: '{install}/share/man'
@@ -96,7 +92,6 @@ ROOT:
     <<: *COMMON_PATH_DEFAULT
     bin: '{install}/bin'
     lib: '{install}/lib'
-    library: '{install}/lib'
     inc: '{install}/include'
     man: '{install}/man'
   env:
@@ -110,7 +105,6 @@ Geant4:
     <<: *CMAKE_PATH_DEFAULT
     bin: '{install}/bin'
     lib: '{install}/lib64'
-    library: '{install}/lib64'
     inc: '{install}/include'
   env:
     G4INSTALL: '{install}'
@@ -131,7 +125,6 @@ ILCUTIL:
   path:
     <<: *CMAKE_PATH_DEFAULT
     lib: '{install}/lib'
-    library: '{install}/lib'
     inc: '{install}/include'
 
 LCIO:
@@ -142,7 +135,6 @@ LCIO:
     <<: *CMAKE_PATH_DEFAULT
     bin: '{install}/bin'
     lib: '{install}/lib'
-    library: '{install}/lib'
     inc: '{install}/include'
   env:
     LCIO: '{install}'
@@ -155,7 +147,6 @@ GEAR:
     <<: *CMAKE_PATH_DEFAULT
     bin: '{install}/bin'
     lib: '{install}/lib'
-    library: '{install}/lib'
     inc: '{install}/include'
 
 Mokka:
@@ -213,7 +204,6 @@ FastJet:
     <<: *CMAKE_PATH_DEFAULT
     bin: '{install}/bin'
     lib: '{install}/lib'
-    library: '{install}/lib'
     inc: '{install}/include'
 
 FastJetClustering:
@@ -244,7 +234,6 @@ KalTest:
     <<: *CMAKE_PATH_DEFAULT
     bin: '{install}/bin'
     lib: '{install}/lib'
-    library: '{install}/lib'
     inc: '{install}/include'
 
 KalDet:
@@ -416,7 +405,6 @@ PandoraPFANew:
     <<: *CMAKE_PATH_DEFAULT
     lib: '{install}/lib'
     inc: '{install}/include'
-    library: '{install}/lib'
 
 MarlinPandora:
   dep: [GCC, CMake, ILCUTIL, Marlin, MarlinUtil, GEAR, PandoraPFANew, LCIO]
@@ -507,7 +495,6 @@ HepPDT:
   path:
     <<: *CMAKE_PATH_DEFAULT
     lib: '{install}/lib'
-    library: '{install}/lib'
     inc: '{install}/include'
 
 GDML:
@@ -517,7 +504,6 @@ GDML:
   path:
     <<: *CMAKE_PATH_DEFAULT
     lib: '{install}/lib'
-    library: '{install}/lib'
 
 LCDD:
   dep: [GCC, CMake, XercesC, Geant4, ILCUTIL, GDML]
@@ -526,7 +512,6 @@ LCDD:
   path:
     <<: *CMAKE_PATH_DEFAULT
     lib: '{install}/lib'
-    library: '{install}/lib'
     inc: '{install}/include'
   env:
     GDML_SCHEMA_DIR: '{install}'
@@ -548,5 +533,4 @@ DD4hep:
     <<: *CMAKE_PATH_DEFAULT
     bin: '{install}/bin'
     lib: '{install}/lib'
-    library: '{install}/lib'
     inc: '{install}/include'

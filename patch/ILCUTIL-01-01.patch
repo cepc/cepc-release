@@ -1,0 +1,24 @@
+diff -Nur 01-01/cmakemodules/ilcsoft_default_settings.cmake 01-01_patched/cmakemodules/ilcsoft_default_settings.cmake
+--- 01-01/cmakemodules/ilcsoft_default_settings.cmake	2011-01-28 22:34:39.399104000 +0800
++++ 01-01_patched/cmakemodules/ilcsoft_default_settings.cmake	2017-12-26 11:20:12.344998855 +0800
+@@ -19,7 +19,7 @@
+ INCLUDE( ilcsoft_default_enable_ctest )
+ INCLUDE( ilcsoft_default_library_versioning )
+ INCLUDE( ilcsoft_default_build_output_directories )
+-INCLUDE( ilcsoft_default_rpath_settings )
++#INCLUDE( ilcsoft_default_rpath_settings )
+ #INCLUDE( ilcsoft_build_32bit_compatible )
+ 
+ 
+diff -Nur 01-01/streamlog/cmake/ilcsoft_default_settings.cmake 01-01_patched/streamlog/cmake/ilcsoft_default_settings.cmake
+--- 01-01/streamlog/cmake/ilcsoft_default_settings.cmake	2011-01-24 19:11:02.719767000 +0800
++++ 01-01_patched/streamlog/cmake/ilcsoft_default_settings.cmake	2017-12-26 11:20:47.415000967 +0800
+@@ -17,7 +17,7 @@
+ INCLUDE( ilcsoft_default_enable_ctest )
+ INCLUDE( ilcsoft_default_library_versioning )
+ INCLUDE( ilcsoft_default_build_output_directories )
+-INCLUDE( ilcsoft_default_rpath_settings )
++#INCLUDE( ilcsoft_default_rpath_settings )
+ #INCLUDE( ilcsoft_build_32bit_compatible )
+ 
+ 

@@ -1,5 +1,5 @@
 cepcenv:
-  require: {'>=': '0.1', '<': '0.2'}
+  require: {'>=': '0.2', '<': '0.3'}
 
 category:
   priority: [work, cepcsoft, external, standby]
@@ -24,11 +24,10 @@ category:
       required_config: [work_root]
       root: '{work_root}'
     standby:
-      install: true
       auto_package: true
       auto_env: false
       required_config: [software_root, platform]
-      root: '{software_root}/{platform}/extra'
+      root: '{software_root}/{platform}/standby'
 
 global_env:
   CEPCSOFT_VERSION: '{version}'
@@ -42,7 +41,7 @@ path_usage:
     inc: '{package}_inc_dir'
   multi_env:
     bin: PATH
-    library: LD_LIBRARY_PATH
+    lib: LD_LIBRARY_PATH
     man: MANPATH
     info: INFOPATH
     pkgconfig: PKG_CONFIG_PATH

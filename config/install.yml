@@ -230,7 +230,9 @@ ILCUTIL:
     param:
       url: https://svnsrv.desy.de/public/ilctools/ilcutil/tags/v{version}
   pre_compile:
-    handler: env
+    handler: patch
+    param:
+      file: ILCUTIL-01-01.patch
   compile:
     <<: *ILCSOFT_COMPILE
   clean:
