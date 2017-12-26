@@ -2,7 +2,7 @@ cepcenv:
   require: {'>=': '0.1', '<': '0.2'}
 
 category:
-  priority: [work, cepcsoft, external]
+  priority: [work, cepcsoft, external, standby]
   extra_config: [work_root]
   categories:
     not_used: {}
@@ -10,19 +10,25 @@ category:
       pre_check: true
     external:
       install: true
-      set_env: true
+      auto_env: true
       required_config: [software_root, platform]
       root: '{software_root}/{platform}/external'
     cepcsoft:
       install: true
-      set_env: true
+      auto_env: true
       required_config: [software_root, platform]
       root: '{software_root}/{platform}/cepcsoft/{version}'
     work:
-      set_env: true
       auto_package: true
+      auto_env: true
       required_config: [work_root]
       root: '{work_root}'
+    standby:
+      install: true
+      auto_package: true
+      auto_env: false
+      required_config: [software_root, platform]
+      root: '{software_root}/{platform}/extra'
 
 global_env:
   CEPCSOFT_VERSION: '{version}'
