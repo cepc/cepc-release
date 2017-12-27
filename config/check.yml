@@ -1,179 +1,299 @@
 Patch:
-  check:
-    executable:
-      - [patch]
-  package_manager:
-    yum: patch
+  install:
+    check:
+      executable:
+        - [patch]
+    package_manager:
+      yum: patch
 
 Wget:
-  check:
-    executable:
-      - [wget]
-  package_manager:
-    yum: wget
+  install:
+    check:
+      executable:
+        - [wget]
+    package_manager:
+      yum: wget
 
 Git:
-  check:
-    executable:
-      - [git]
-  package_manager:
-    yum: git
+  install: &CHECK_GIT_INSTALL
+    check:
+      executable:
+        - [git]
+    package_manager:
+      yum: git
+  runtime:
+    <<: *CHECK_GIT_INSTALL
 
 Subversion:
-  check:
-    executable:
-      - [svn]
-  package_manager:
-    yum: subversion
+  install:
+    check:
+      executable:
+        - [svn]
+    package_manager:
+      yum: subversion
 
 GCCSys:
-  check:
-    executable:
-      - [gcc]
-      - [g++]
-      - [gfortran]
-  package_manager:
-    yum: [gcc, gcc-c++, gcc-gfortran]
+  install:
+    check:
+      executable:
+        - [gcc]
+    package_manager:
+      yum: [gcc]
 
 Make:
-  check:
-    executable:
-      - [make]
-  package_manager:
-    yum: make
+  install: &CHECK_MAKE_INSTALL
+    check:
+      executable:
+        - [make]
+    package_manager:
+      yum: make
+  runtime:
+    <<: *CHECK_MAKE_INSTALL
 
 Java:
-  check:
-    executable:
-      - [javac]
-  package_manager:
-    yum: java-1.8.0-openjdk-devel
+  install:
+    check:
+      executable:
+        - [javac]
+    package_manager:
+      yum: java-1.8.0-openjdk-devel
+  runtime:
+    check:
+      executable:
+        - [java]
+    package_manager:
+      yum: java-1.8.0-openjdk
 
 
 Python:
-  check:
-    include:
-      - [python2.6/Python.h, python2.7/Python.h]
-  package_manager:
-    yum: python-devel
+  install:
+    check:
+      include:
+        - [python*/Python.h]
+    package_manager:
+      yum: python-devel
+  runtime:
+    check:
+      executable:
+        - [python]
+    package_manager:
+      yum: python
 
 MySQL:
-  check:
-    include:
-      - [mysql/mysql.h, mysql.h]
-  package_manager:
-    yum: mysql-devel
+  install:
+    check:
+      include:
+        - [mysql/mysql.h, mysql.h]
+    package_manager:
+      yum: mysql-devel
+  runtime:
+    check:
+      executable:
+        - [mysql]
+    package_manager:
+      yum: mysql
 
 SQLite:
-  check:
-    include:
-      - [sqlite3.h]
-  package_manager:
-    yum: sqlite-devel
+  install:
+    check:
+      include:
+        - [sqlite3.h]
+    package_manager:
+      yum: sqlite-devel
+  runtime:
+    check:
+      executable:
+        - [sqlite3]
+    package_manager:
+      yum: sqlite
 
 OpenSSL:
-  check:
-    include:
-      - [openssl/ssl.h]
-  package_manager:
-    yum: openssl-devel
+  install:
+    check:
+      include:
+        - [openssl/ssl.h]
+    package_manager:
+      yum: openssl-devel
+  runtime:
+    check:
+      executable:
+        - [openssl]
+    package_manager:
+      yum: openssl
 
-ICU:
-  check:
-    include:
-      - [unicode/utypes.h]
-  package_manager:
-    yum: libicu-devel
+#ICU:
+#  install:
+#    check:
+#      include:
+#        - [unicode/utypes.h]
+#    package_manager:
+#      yum: libicu-devel
 
 #PCRE:
-#  check:
-#    include:
-#      - [pcre.h]
-#  package_manager:
-#    yum: pcre-devel
+#  install:
+#    check:
+#      include:
+#        - [pcre.h]
+#    package_manager:
+#      yum: pcre-devel
 
 Libxml2:
-  check:
-    include:
-      - [libxml2/libxml/tree.h, libxml/tree.h]
-  package_manager:
-    yum: libxml2-devel
+  install:
+    check:
+      include:
+        - [libxml2/libxml/tree.h, libxml/tree.h]
+    package_manager:
+      yum: libxml2-devel
+  runtime:
+    check:
+      library:
+        - [libxml2.so*]
+    package_manager:
+      yum: libxml2
 
 #FreeType:
-#  check:
-#    include:
-#      - [freetype2/freetype/freetype.h, freetype/freetype.h]
-#  package_manager:
-#    yum: freetype-devel
+#  install:
+#    check:
+#      include:
+#        - [freetype2/freetype/freetype.h, freetype/freetype.h]
+#    package_manager:
+#      yum: freetype-devel
 
 FFTW:
-  check:
-    include:
-      - [fftw3.h]
-  package_manager:
-    yum: fftw-devel
+  install:
+    check:
+      include:
+        - [fftw3.h]
+    package_manager:
+      yum: fftw-devel
+  runtime:
+    check:
+      library:
+        - [libfftw3.so*]
+    package_manager:
+      yum: fftw
 
 
 X11:
-  check:
-    include:
-      - [X11/Xlib.h]
-  package_manager:
-    yum: libX11-devel
+  install:
+    check:
+      include:
+        - [X11/Xlib.h]
+    package_manager:
+      yum: libX11-devel
+  runtime:
+    check:
+      library:
+        - [libX11.so*]
+    package_manager:
+      yum: libX11
 
 Xpm:
-  check:
-    include:
-      - [X11/xpm.h]
-  package_manager:
-    yum: libXpm-devel
+  install:
+    check:
+      include:
+        - [X11/xpm.h]
+    package_manager:
+      yum: libXpm-devel
+  runtime:
+    check:
+      library:
+        - [libXpm.so*]
+    package_manager:
+      yum: libXpm
 
 Xt:
-  check:
-    include:
-      - [X11/Intrinsic.h]
-  package_manager:
-    yum: libXt-devel
+  install:
+    check:
+      include:
+        - [X11/Intrinsic.h]
+    package_manager:
+      yum: libXt-devel
+  runtime:
+    check:
+      library:
+        - [libXt.so*]
+    package_manager:
+      yum: libXt
 
 Xft:
-  check:
-    include:
-      - [X11/Xft/Xft.h]
-  package_manager:
-    yum: libXft-devel
+  install:
+    check:
+      include:
+        - [X11/Xft/Xft.h]
+    package_manager:
+      yum: libXft-devel
+  runtime:
+    check:
+      library:
+        - [libXft.so*]
+    package_manager:
+      yum: libXft
 
 Xext:
-  check:
-    include:
-      - [X11/extensions/shape.h]
-  package_manager:
-    yum: libXext-devel
+  install:
+    check:
+      include:
+        - [x11/extensions/shape.h]
+    package_manager:
+      yum: libXext-devel
+  runtime:
+    check:
+      library:
+        - [libXext.so*]
+    package_manager:
+      yum: libXext
 
 Xmu:
-  check:
-    include:
-      - [X11/Xmu/Xmu.h]
-  package_manager:
-    yum: libXmu-devel
+  install:
+    check:
+      include:
+        - [X11/Xmu/Xmu.h]
+    package_manager:
+      yum: libXmu-devel
+  runtime:
+    check:
+      library:
+        - [libXmu.so*]
+    package_manager:
+      yum: libXmu
 
 Xauth:
-  check:
-    executable:
-      - [xauth]
-  package_manager:
-    yum: xorg-x11-xauth
+  install: &CHECK_XAUTH_INSTALL
+    check:
+      executable:
+        - [xauth]
+    package_manager:
+      yum: xorg-x11-xauth
+  runtime:
+    <<: *CHECK_XAUTH_INSTALL
 
 OpenGL:
-  check:
-    include:
-      - [GL/gl.h]
-      - [GL/glu.h]
-  package_manager:
-    yum: [mesa-libGL-devel, mesa-libGLU-devel]
+  install:
+    check:
+      include:
+        - [GL/gl.h]
+        - [GL/glu.h]
+    package_manager:
+      yum: [mesa-libGL-devel, mesa-libGLU-devel]
+  runtime:
+    check:
+      library:
+        - [libGL.so*]
+        - [libGLU.so*]
+    package_manager:
+      yum: [mesa-libGL, mesa-libGLU]
 
 GLUT:
-  check:
-    include:
-      - [GL/glut.h]
-  package_manager:
-    yum: freeglut-devel
+  install:
+    check:
+      include:
+        - [GL/glut.h]
+    package_manager:
+      yum: freeglut-devel
+  runtime:
+    check:
+      library:
+        - [libglut.so*]
+    package_manager:
+      yum: freeglut

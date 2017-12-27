@@ -74,6 +74,8 @@ XercesC:
     handler: env
   compile:
     handler: conf_make
+    param:
+      configure: [--enable-transcoder-gnuiconv, --enable-msgloader-inmemory]
   post_compile:
     handler: lib
   clean: &CLEAN_COMMON
