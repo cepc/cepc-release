@@ -234,7 +234,7 @@ Xext:
   install:
     check:
       include:
-        - [x11/extensions/shape.h]
+        - [X11/extensions/shape.h]
     package_manager:
       yum: libXext-devel
   runtime:

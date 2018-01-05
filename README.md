@@ -1,2 +1,2 @@
-# Cepc Release
+# CEPC Release
 CEPC software release definition

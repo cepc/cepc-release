@@ -256,6 +256,7 @@ LCIO:
         <<: *ILCSOFT_ENVCMAKE
         BUILD_ROOTDICT: 'ON'
         INSTALL_JAR: 'OFF'
+        LCIO_GENERATE_HEADERS: 'OFF'
   clean:
     <<: *CLEAN_COMMON
 

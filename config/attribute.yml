@@ -34,7 +34,6 @@ CMake:
   path:
     home: '{install}'
     bin: '{install}/bin'
-    lib: '{install}/lib'
     man: '{install}/man'
 
 
