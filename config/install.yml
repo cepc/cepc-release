@@ -324,6 +324,10 @@ CED:
     handler: svn
     param:
       url: https://svnsrv.desy.de/public/marlinreco/CED/tags/v{version}
+  pre_compile:
+    handler: patch
+    param:
+      file: CED-01-09-01.patch
   compile:
     handler: cmake
     param:

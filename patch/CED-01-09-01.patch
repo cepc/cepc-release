@@ -1,0 +1,18 @@
+diff -Nur 01-09-01/CMakeLists.txt 01-09-01_patched/CMakeLists.txt
+--- 01-09-01/CMakeLists.txt	2013-08-07 17:41:11.284200000 +0800
++++ 01-09-01_patched/CMakeLists.txt	2018-01-06 14:20:01.067000353 +0800
+@@ -106,10 +106,10 @@
+     AUX_SOURCE_DIRECTORY( ./src/server server_sources )
+     ADD_EXECUTABLE( glced ${server_sources} )
+ 
+-    SET_TARGET_PROPERTIES( glced PROPERTIES
+-        INSTALL_RPATH "${CMAKE_INSTALL_RPATH};${_opengl_linker_paths}"
+-        INSTALL_NAME_DIR "${CMAKE_INSTALL_NAME_DIR};${_opengl_linker_paths}"
+-    )
++    #SET_TARGET_PROPERTIES( glced PROPERTIES
++    #    INSTALL_RPATH "${CMAKE_INSTALL_RPATH};${_opengl_linker_paths}"
++    #    INSTALL_NAME_DIR "${CMAKE_INSTALL_NAME_DIR};${_opengl_linker_paths}"
++    #)
+ 
+     TARGET_LINK_LIBRARIES( glced CED 
+         ${GLUT_glut_LIBRARY}
