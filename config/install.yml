@@ -431,7 +431,7 @@ LCCD:
       ignore_install_prefix: true
       envcmake:
         <<: *ILCSOFT_ENVCMAKE
-        LCCD_CONDDBMYSQL: 'OFF'
+        LCCD_CONDDBMYSQL: 'ON'
   clean:
     <<: *CLEAN_COMMON
 
@@ -668,6 +668,10 @@ MarlinTPC:
     handler: svn
     param:
       url: https://svnsrv.desy.de/public/marlintpc/tags/v{version}
+  pre_compile:
+    handler: patch
+    param:
+      file: MarlinTPC-00-16.patch
   compile:
     <<: *ILCSOFT_COMPILE
   clean:

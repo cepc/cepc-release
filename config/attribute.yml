@@ -163,8 +163,8 @@ CondDBMySQL:
     <<: *ILCUTIL_LOCATION_DEFAULT
   path:
     <<: *CMAKE_PATH_DEFAULT
-    bin: '{install}/bin'
     lib: '{install}/lib'
+    inc: '{install}/include'
 
 Druid:
   dep: [GCC, LCIO, GEAR, ROOT]
@@ -255,7 +255,7 @@ GBL:
     inc: '{install}/include'
 
 LCCD:
-  dep: [GCC, CMake, ILCUTIL, LCIO]
+  dep: [GCC, CMake, ILCUTIL, LCIO, CondDBMySQL]
   location:
     <<: *ILCUTIL_LOCATION_DEFAULT
   path:

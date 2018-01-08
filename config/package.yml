@@ -75,7 +75,7 @@ Mokka:
   version: 08-03_150612
 
 CondDBMySQL:
-  category: not_used
+  category: cepcsoft
   path: Simulation
   version: 0-9-6
 
@@ -225,7 +225,7 @@ PathFinder:
   version: 00-06
 
 MarlinTPC:
-  category: not_used
+  category: cepcsoft
   path: Analysis/SubDetectorStudy/TPC
   version: 00-16
 

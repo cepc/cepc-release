@@ -1,0 +1,42 @@
+diff -Nur 00-16/reconstruction/trackreco/src/KalTrackingHelix.cc 00-16_patched/reconstruction/trackreco/src/KalTrackingHelix.cc
+--- 00-16/reconstruction/trackreco/src/KalTrackingHelix.cc	2013-11-19 19:13:18.428991000 +0800
++++ 00-16_patched/reconstruction/trackreco/src/KalTrackingHelix.cc	2018-01-08 17:12:57.760999923 +0800
+@@ -299,7 +299,7 @@
+     streamlog_out(DEBUG3) << "Vector of hit: x=" << from.GetPivot().X() << " y=" << from.GetPivot().Y() << endl;
+     streamlog_out(DEBUG3) << "sv: " << from.GetCurState()[2][0] << endl;
+ 
+-    TVector3 v1(dxdphi(0,0), dxdphi(1,0));
++    TVector3 v1(dxdphi(0,0), dxdphi(1,0), 0.);
+ 	v1 = v1.Unit();
+ 
+ 	const TPCModule& tpcModule = _tpcParameters.getNearestModule(xto(0), xto(1));
+diff -Nur 00-16/reconstruction/trackreco/src/KalTrackingStraight.cc 00-16_patched/reconstruction/trackreco/src/KalTrackingStraight.cc
+--- 00-16/reconstruction/trackreco/src/KalTrackingStraight.cc	2013-12-18 23:18:10.774210000 +0800
++++ 00-16_patched/reconstruction/trackreco/src/KalTrackingStraight.cc	2018-01-08 17:13:15.665017065 +0800
+@@ -349,11 +349,11 @@
+   }
+ 
+   // transfer intersections to global coordinates
+-  TVector3 firstIntersection( intersections.first.first,  intersections.first.second);
+-  TVector3 secondIntersection( intersections.second.first,  intersections.second.second);
++  TVector3 firstIntersection( intersections.first.first,  intersections.first.second, 0.);
++  TVector3 secondIntersection( intersections.second.first,  intersections.second.second, 0.);
+ 
+   // use TVector to conveniently calculate the distances
+-  TVector3 lastHit( mrh.getHitPosition()[0], mrh.getHitPosition()[1]);
++  TVector3 lastHit( mrh.getHitPosition()[0], mrh.getHitPosition()[1], 0.);
+   
+   // pick the nearest and return it (what about the z coordinate?)
+   return Intersection ( (lastHit-firstIntersection).Mag2() < 
+diff -Nur 00-16/validation/testTPCHitDomain/testTPCHitDomain.cpp 00-16_patched/validation/testTPCHitDomain/testTPCHitDomain.cpp
+--- 00-16/validation/testTPCHitDomain/testTPCHitDomain.cpp	2012-11-20 14:31:57.398448000 +0800
++++ 00-16_patched/validation/testTPCHitDomain/testTPCHitDomain.cpp	2018-01-08 17:13:30.167989687 +0800
+@@ -61,7 +61,7 @@
+ 
+     // FIXME: thransfor the global Gear coordinates to cartesian, or at least do a check
+     
+-    TVector3 padPosition(globalGearCoordinates[0], globalGearCoordinates[1]);
++    TVector3 padPosition(globalGearCoordinates[0], globalGearCoordinates[1], 0.);
+     std::set< std::pair<int, int> > moduleRows = hitDomain.getModuleRows(padPosition);
+ 
+ 	cout << endl << "Domain size is " << moduleRows.size() << endl;

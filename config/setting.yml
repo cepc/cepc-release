@@ -50,6 +50,7 @@ path_usage:
   single_env:
     home: '{package}_HOME'
     src: '{package}_SOURCE'
+    bin: '{package}_BIN'
     lib: '{package}_LIB'
     inc: '{package}_INCLUDE'
 
