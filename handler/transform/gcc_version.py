@@ -12,6 +12,11 @@ def _modify_categories(config_release, platform_append):
         if 'root' in config:
             config['root'] = _append_gcc_version(config['root'], platform_append)
 
+def _modify_global_env(config_release, platform_append):
+    setting_global_env = config_release.get('setting', {}).get('global_env', {})
+    for env_name, value in setting_global_env.items():
+        setting_global_env[env_name] = _append_gcc_version(value, platform_append)
+
 def run(param):
     config_release = param['config_release']
     gcc_cfg = config_release.get('package', {}).get('GCC', {})
@@ -25,6 +30,8 @@ def run(param):
             if len(ver_frag) >= 2:
                 gcc_v2 = ''.join(ver_frag[:2])
                 platform_append = '-gcc' + gcc_v2
+
                 _modify_categories(config_release, platform_append)
+                _modify_global_env(config_release, platform_append)
 
     return config_release

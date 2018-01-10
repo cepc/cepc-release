@@ -30,6 +30,7 @@ category:
       root: '{software_root}/{platform}/standby'
 
 global_env:
+  CEPCSOFT: '{software_root}/{platform}/cepcsoft/{version}'
   CEPCSOFT_VERSION: '{version}'
 
 path_usage:
