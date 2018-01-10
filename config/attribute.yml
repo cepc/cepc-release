@@ -26,6 +26,10 @@ GCC:
     bin: '{install}/bin'
     lib: '{install}/lib64'
     man: '{install}/share/man'
+  env:
+    CC: '{install}/bin/gcc'
+    CXX: '{install}/bin/g++'
+    FC: '{install}/bin/gfortran'
 
 CMake:
   dep: GCC
@@ -103,7 +107,7 @@ Geant4:
   path:
     <<: *CMAKE_PATH_DEFAULT
     bin: '{install}/bin'
-    lib: '{install}/lib64'
+    lib: '{install}/lib'
     inc: '{install}/include'
   env:
     G4INSTALL: '{install}'

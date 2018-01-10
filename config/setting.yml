@@ -31,6 +31,7 @@ category:
 
 global_env:
   CEPCSOFT: '{software_root}/{platform}/cepcsoft/{version}'
+  CEPCSOFT_EXTERNAL: '{software_root}/{platform}/external'
   CEPCSOFT_VERSION: '{version}'
 
 path_usage:
@@ -58,4 +59,4 @@ path_usage:
 handler:
   auto_compile: auto_cmake
 
-pre_transform: [basic_package, gcc_version]
+pre_transform: [basic_package, gcc_version, geant4_libdir]
