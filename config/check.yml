@@ -37,8 +37,10 @@ GCCSys:
     check:
       executable:
         - [gcc]
+        - [g++]
+        - [gfortran]
     package_manager:
-      yum: [gcc]
+      yum: [gcc, gcc-c++, gcc-gfortran]
 
 Make:
   install: &CHECK_MAKE_INSTALL
