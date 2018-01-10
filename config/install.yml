@@ -153,7 +153,9 @@ ROOT:
       file: root_v{version}.source.tar.gz
       main: root
   pre_compile:
-    handler: env
+    handler: patch
+    param:
+      file: root-5.34.18.patch
   compile:
     handler: conf_make
     param:
