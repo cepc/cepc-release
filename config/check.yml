@@ -5,6 +5,7 @@ Patch:
         - [patch]
     package_manager:
       yum: patch
+      apt-get: patch
 
 Wget:
   install:
@@ -13,6 +14,7 @@ Wget:
         - [wget]
     package_manager:
       yum: wget
+      apt-get: wget
 
 Git:
   install: &CHECK_GIT_INSTALL
@@ -21,6 +23,7 @@ Git:
         - [git]
     package_manager:
       yum: git
+      apt-get: git
   runtime:
     <<: *CHECK_GIT_INSTALL
 
@@ -31,6 +34,7 @@ Subversion:
         - [svn]
     package_manager:
       yum: subversion
+      apt-get: subversion
 
 GCCSys:
   install:
@@ -41,6 +45,7 @@ GCCSys:
         - [gfortran]
     package_manager:
       yum: [gcc, gcc-c++, gcc-gfortran]
+      apt-get: [gcc, gcc-c++, gcc-gfortran]
 
 Make:
   install: &CHECK_MAKE_INSTALL
@@ -49,6 +54,7 @@ Make:
         - [make]
     package_manager:
       yum: make
+      apt-get: make
   runtime:
     <<: *CHECK_MAKE_INSTALL
 
@@ -59,12 +65,14 @@ Java:
         - [javac]
     package_manager:
       yum: java-1.8.0-openjdk-devel
+      apt-get: openjdk-8-jdk
   runtime:
     check:
       executable:
         - [java]
     package_manager:
       yum: java-1.8.0-openjdk
+      apt-get: openjdk-8-jre
 
 
 Python:
@@ -74,12 +82,14 @@ Python:
         - [python*/Python.h]
     package_manager:
       yum: python-devel
+      apt-get: python-dev
   runtime:
     check:
       executable:
         - [python]
     package_manager:
       yum: python
+      apt-get: python
 
 MySQL:
   install:
@@ -88,12 +98,14 @@ MySQL:
         - [mysql/mysql.h, mysql.h]
     package_manager:
       yum: mysql-devel
+      apt-get: [mysql-client, libmysqlclient-dev]
   runtime:
     check:
       executable:
         - [mysql]
     package_manager:
       yum: mysql
+      apt-get: mysql-client
 
 SQLite:
   install:
@@ -102,12 +114,14 @@ SQLite:
         - [sqlite3.h]
     package_manager:
       yum: sqlite-devel
+      apt-get: [sqlite3, libsqlite3-dev]
   runtime:
     check:
       executable:
         - [sqlite3]
     package_manager:
       yum: sqlite
+      apt-get: sqlite3
 
 OpenSSL:
   install:
@@ -116,12 +130,14 @@ OpenSSL:
         - [openssl/ssl.h]
     package_manager:
       yum: openssl-devel
+      apt-get: [openssl, libssl-dev]
   runtime:
     check:
       executable:
         - [openssl]
     package_manager:
       yum: openssl
+      apt-get: openssl
 
 #ICU:
 #  install:
@@ -146,12 +162,14 @@ Libxml2:
         - [libxml2/libxml/tree.h, libxml/tree.h]
     package_manager:
       yum: libxml2-devel
+      apt-get: libxml2-dev
   runtime:
     check:
       library:
         - [libxml2.so*]
     package_manager:
       yum: libxml2
+      apt-get: libxml2
 
 #FreeType:
 #  install:
@@ -168,12 +186,14 @@ FFTW:
         - [fftw3.h]
     package_manager:
       yum: fftw-devel
+      apt-get: libfftw3-dev
   runtime:
     check:
       library:
         - [libfftw3.so*]
     package_manager:
       yum: fftw
+      apt-get: libfftw3-bin
 
 
 X11:
@@ -183,12 +203,14 @@ X11:
         - [X11/Xlib.h]
     package_manager:
       yum: libX11-devel
+      apt-get: libx11-dev
   runtime:
     check:
       library:
         - [libX11.so*]
     package_manager:
       yum: libX11
+      apt-get: libx11-6
 
 Xpm:
   install:
@@ -197,12 +219,14 @@ Xpm:
         - [X11/xpm.h]
     package_manager:
       yum: libXpm-devel
+      apt-get: libxpm-dev
   runtime:
     check:
       library:
         - [libXpm.so*]
     package_manager:
       yum: libXpm
+      apt-get: libxpm4
 
 Xt:
   install:
@@ -211,12 +235,14 @@ Xt:
         - [X11/Intrinsic.h]
     package_manager:
       yum: libXt-devel
+      apt-get: libxt-dev
   runtime:
     check:
       library:
         - [libXt.so*]
     package_manager:
       yum: libXt
+      apt-get: libxt6
 
 Xft:
   install:
@@ -225,12 +251,14 @@ Xft:
         - [X11/Xft/Xft.h]
     package_manager:
       yum: libXft-devel
+      apt-get: libxft-dev
   runtime:
     check:
       library:
         - [libXft.so*]
     package_manager:
       yum: libXft
+      apt-get: libxft2
 
 Xext:
   install:
@@ -239,12 +267,14 @@ Xext:
         - [X11/extensions/shape.h]
     package_manager:
       yum: libXext-devel
+      apt-get: libxext-dev
   runtime:
     check:
       library:
         - [libXext.so*]
     package_manager:
       yum: libXext
+      apt-get: libxext6
 
 Xmu:
   install:
@@ -253,12 +283,14 @@ Xmu:
         - [X11/Xmu/Xmu.h]
     package_manager:
       yum: libXmu-devel
+      apt-get: libxmu-dev
   runtime:
     check:
       library:
         - [libXmu.so*]
     package_manager:
       yum: libXmu
+      apt-get: libxmu6
 
 Xauth:
   install: &CHECK_XAUTH_INSTALL
@@ -267,6 +299,7 @@ Xauth:
         - [xauth]
     package_manager:
       yum: xorg-x11-xauth
+      apt-get: xauth
   runtime:
     <<: *CHECK_XAUTH_INSTALL
 
@@ -278,6 +311,7 @@ OpenGL:
         - [GL/glu.h]
     package_manager:
       yum: [mesa-libGL-devel, mesa-libGLU-devel]
+      apt-get: [libgl1-mesa-dev, libglu1-mesa-dev]
   runtime:
     check:
       library:
@@ -285,6 +319,7 @@ OpenGL:
         - [libGLU.so*]
     package_manager:
       yum: [mesa-libGL, mesa-libGLU]
+      apt-get: [libgl1-mesa-glx, libglu1-mesa]
 
 GLUT:
   install:
@@ -293,9 +328,11 @@ GLUT:
         - [GL/glut.h]
     package_manager:
       yum: freeglut-devel
+      apt-get: freeglut3-dev
   runtime:
     check:
       library:
         - [libglut.so*]
     package_manager:
       yum: freeglut
+      apt-get: freeglut3
