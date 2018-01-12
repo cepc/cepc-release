@@ -1,11 +1,11 @@
-Patch:
+CURL:
   install:
     check:
       executable:
-        - [patch]
+        - [curl]
     package_manager:
-      yum: patch
-      apt-get: patch
+      yum: curl
+      apt-get: curl
 
 Wget:
   install:
@@ -15,6 +15,15 @@ Wget:
     package_manager:
       yum: wget
       apt-get: wget
+
+Patch:
+  install:
+    check:
+      executable:
+        - [patch]
+    package_manager:
+      yum: patch
+      apt-get: patch
 
 Git:
   install: &CHECK_GIT_INSTALL
@@ -45,7 +54,7 @@ GCCSys:
         - [gfortran]
     package_manager:
       yum: [gcc, gcc-c++, gcc-gfortran]
-      apt-get: [gcc, gcc-c++, gcc-gfortran]
+      apt-get: [gcc, g++, gfortran]
 
 Make:
   install: &CHECK_MAKE_INSTALL
