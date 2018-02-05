@@ -53,6 +53,10 @@ Geant4:
   category: external
   version: 9.6.p02
 
+HepMC:
+  category: external
+  version: 2.06.08
+
 
 ILCUTIL:
   category: cepcsoft

@@ -212,6 +212,29 @@ Geant4:
   clean:
     <<: *CLEAN_COMMON
 
+HepMC:
+  download:
+    handler: http
+    param:
+      url: http://lcgapp.cern.ch/project/simu/HepMC/download/HepMC-{version}.tar.gz
+  extract:
+    handler: tar
+    param:
+      file: HepMC-{version}.tar.gz
+      main: HepMC-{version}
+  pre_compile:
+    handler: env
+  compile:
+    handler: cmake
+    param:
+      envcmake:
+        momentum: GEV
+        length: MM
+  post_compile:
+    handler: lib
+  clean:
+    <<: *CLEAN_COMMON
+
 
 ilcsoft_base: &ILCSOFT
   pre_compile:
