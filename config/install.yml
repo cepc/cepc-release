@@ -292,6 +292,21 @@ Mokka:
   clean:
     <<: *CLEAN_COMMON
 
+MokkaC:
+  download:
+    handler: http
+    param:
+      url: http://cepcsoft.ihep.ac.cn/package/cepcsoft/MokkaC/{version}/MokkaC-{version}.tar.gz
+  extract:
+    handler: tar
+    param:
+      file: MokkaC-{version}.tar.gz
+      main: MokkaC-{version}
+  compile:
+    <<: *ILCSOFT_COMPILE
+  clean:
+    <<: *CLEAN_COMMON
+
 CondDBMySQL:
   download:
     handler: svn

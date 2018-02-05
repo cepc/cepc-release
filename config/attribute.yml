@@ -161,6 +161,15 @@ Mokka:
     bin: '{install}/bin'
     lib: '{install}/lib'
 
+MokkaC:
+  dep: [GCC, CMake, Geant4, MySQL, ILCUTIL, LCIO, GEAR]
+  location:
+    <<: *ILCUTIL_LOCATION_DEFAULT
+  path:
+    <<: *CMAKE_PATH_DEFAULT
+    bin: '{install}/bin'
+    lib: '{install}/lib'
+
 CondDBMySQL:
   dep: [GCC, CMake, MySQL, ILCUTIL]
   location:

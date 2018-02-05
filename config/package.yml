@@ -70,9 +70,14 @@ GEAR:
   version: 01-04
 
 Mokka:
-  category: cepcsoft
+  category: not_used
   path: Simulation
   version: 08-03_150612
+
+MokkaC:
+  category: cepcsoft
+  path: Simulation
+  version: 0.1.1
 
 CondDBMySQL:
   category: cepcsoft
@@ -197,7 +202,7 @@ MarlinKinfit:
 Arbor:
   category: cepcsoft
   path: Reconstruction/PFA
-  version: 151125_v3
+  version: 3.2.1
 
 PandoraPFANew:
   category: cepcsoft
