@@ -10,6 +10,9 @@ GCCSys:
 Make:
   category: system
 
+Boost:
+  category: system
+
 MySQL:
   category: system
 
