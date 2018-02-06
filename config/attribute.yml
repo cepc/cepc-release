@@ -162,7 +162,7 @@ GEAR:
     inc: '{install}/include'
 
 Mokka:
-  dep: [GCC, CMake, Geant4, MySQL, ILCUTIL, LCIO, GEAR]
+  dep: [GCC, CMake, Geant4, MySQL, HepMC, Boost, ILCUTIL, LCIO, GEAR]
   location:
     <<: *ILCUTIL_LOCATION_DEFAULT
   path:
@@ -171,7 +171,7 @@ Mokka:
     lib: '{install}/lib'
 
 MokkaC:
-  dep: [GCC, CMake, Geant4, MySQL, ILCUTIL, LCIO, GEAR]
+  dep: [GCC, CMake, Geant4, MySQL, HepMC, Boost, ILCUTIL, LCIO, GEAR]
   location:
     <<: *ILCUTIL_LOCATION_DEFAULT
   path:

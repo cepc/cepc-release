@@ -162,7 +162,13 @@ ROOT:
       ignore_install_prefix: true
       configure:
         - --fail-on-missing
+        - --enable-builtin-afterimage
+        - --enable-builtin-ftgl
+        - --enable-builtin-freetype
+        - --enable-builtin-glew
         - --enable-builtin-pcre
+        - --enable-builtin-zlib
+        - --enable-builtin-lzma
         - --enable-explicitlink
         - --enable-soversion
         - --enable-roofit

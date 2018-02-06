@@ -1,3 +1,16 @@
+Glibc:
+  install: &CHECK_GLIBC_INSTALL
+    check:
+      include:
+        - [stdio.h]
+      library:
+        - [libc.so]
+    package_manager:
+      yum: [glibc-devel, glibc-headers]
+      apt-get: libc6-dev
+  runtime:
+    <<: *CHECK_GLIBC_INSTALL
+
 CURL:
   install:
     check:
@@ -163,6 +176,17 @@ OpenSSL:
 #        - [pcre.h]
 #    package_manager:
 #      yum: pcre-devel
+
+Boost:
+  install: &CHECK_BOOST_INSTALL
+    check:
+      include:
+        - [boost/config.hpp]
+    package_manager:
+      yum: boost-devel
+      apt-get: libboost-dev
+  runtime:
+    <<: *CHECK_BOOST_INSTALL
 
 Libxml2:
   install:
