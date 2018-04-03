@@ -48,6 +48,7 @@ path_usage:
     info: INFOPATH
     pkgconfig: PKG_CONFIG_PATH
     cmake: CMAKE_PREFIX_PATH
+    python: PYTHON_PATH
     marlin: MARLIN_DLL
   single_env:
     home: '{package}_HOME'

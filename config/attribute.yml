@@ -97,6 +97,7 @@ ROOT:
     lib: '{install}/lib'
     inc: '{install}/include'
     man: '{install}/man'
+    python: '{install}/lib'
   env:
     ROOTSYS: '{install}'
 
@@ -148,6 +149,7 @@ LCIO:
     bin: '{install}/bin'
     lib: '{install}/lib'
     inc: '{install}/include'
+    python: '{source}/src/python'
   env:
     LCIO: '{install}'
 
