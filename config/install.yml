@@ -201,7 +201,9 @@ Geant4:
       file: geant4.{version}.tar.gz
       main: geant4.{version}
   pre_compile:
-    handler: env
+    handler: command
+    param:
+      cmd: ['sed', '-i', 's#http://geant4.cern.ch/support/source#http://cepcsoft.ihep.ac.cn/package/cepcsoft/Geant4/support/source#', 'cmake/Modules/Geant4InstallData.cmake']
   compile:
     handler: cmake
     param:
