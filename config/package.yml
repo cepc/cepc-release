@@ -209,7 +209,7 @@ MarlinKinfit:
 Arbor:
   category: cepcsoft
   path: Reconstruction/PFA
-  version: 3.4.1
+  version: 3.4.2
 
 PandoraPFANew:
   category: cepcsoft

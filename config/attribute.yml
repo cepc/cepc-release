@@ -197,6 +197,8 @@ Druid:
   path:
     <<: *COMMON_PATH_DEFAULT
     bin: '{install}/bin'
+  env:
+    DRUIDDIR: '{install}'
 
 CED:
   dep: [GCC, CMake, GLUT, OpenGL, ILCUTIL]
